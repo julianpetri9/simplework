@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SimpleWork | KI-Workshops für kleine Betriebe</title>
+<meta name="description" content="Praxisnahe KI-Workshops für kleine Betriebe in Marburg und Umgebung. Mitarbeitende lernen an eigenen Aufgaben, KI-Werkzeuge einzusetzen und deren Ergebnisse zu prüfen.">
+<style>
+  @font-face { font-family: "Schibsted Grotesk"; src: url("fonts/schibsted-grotesk-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Schibsted Grotesk"; src: url("fonts/schibsted-grotesk-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+  @font-face { font-family: "Schibsted Grotesk"; src: url("fonts/schibsted-grotesk-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Kalam"; src: url("fonts/kalam-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+  :root {
+    --paper: #F4F6F5;
+    --sheet: #FFFFFF;
+    --ink: #18302F;
+    --muted: #566563;
+    --line: #D5DCDA;
+    --marker: #F5DC5A;
+    --pen: #B42318;
+    --sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --hand: "Kalam", "Comic Sans MS", cursive;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  a { color: var(--ink); text-underline-offset: 3px; }
+  a:focus-visible, .button:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Kopfzeile */
+  .site-header { border-bottom: 1px solid var(--line); }
+  .site-header .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; padding-top: 1.1rem; padding-bottom: 1.1rem;
+  }
+  .brand { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; text-decoration: none; }
+  .site-nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .site-nav a { text-decoration: none; color: var(--muted); font-weight: 500; }
+  .site-nav a:hover { color: var(--ink); }
+
+  /* Einstieg */
+  .hero { padding: 4.5rem 0 4rem; }
+  .hero .wrap {
+    display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero .wrap { grid-template-columns: 1.05fr 1fr; gap: 4rem; }
+  }
+  h1 {
+    font-size: clamp(2.1rem, 4.6vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 0 0 1.25rem;
+    max-width: 16ch;
+  }
+  .lead { font-size: 1.2rem; color: var(--muted); max-width: 34rem; margin: 0 0 2rem; }
+  .button {
+    display: inline-block;
+    background: var(--ink); color: var(--sheet);
+    padding: 0.85rem 1.4rem; border-radius: 6px;
+    text-decoration: none; font-weight: 500;
+  }
+  .button:hover { background: #24453F; }
+  .hero-note { margin-top: 1rem; font-size: 0.95rem; color: var(--muted); }
+
+  /* Das Beispielblatt */
+  .sheet {
+    background: var(--sheet);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1.75rem 1.75rem 2rem;
+    position: relative;
+  }
+  .sheet-meta { font-size: 0.9rem; color: var(--muted); margin: 0 0 0.35rem; }
+  .sheet-question {
+    margin: 0 0 1.5rem; padding-bottom: 1.25rem;
+    border-bottom: 1px dashed var(--line);
+  }
+  .sheet-answer { margin: 0; }
+  mark {
+    background: linear-gradient(transparent 12%, var(--marker) 12%, var(--marker) 88%, transparent 88%);
+    color: inherit; padding: 0 0.1em;
+  }
+  .pen {
+    font-family: var(--hand);
+    color: var(--pen);
+    font-size: 1.3rem;
+    line-height: 1.3;
+    margin: 1rem 0 0 1.25rem;
+    transform: rotate(-2deg);
+    transform-origin: left;
+    border-left: 2px solid var(--pen);
+    padding-left: 0.75rem;
+  }
+  .sheet-caption { font-size: 0.95rem; color: var(--muted); margin: 1rem 0 0; max-width: 34rem; }
+
+  /* Abschnitte */
+  section.block { padding: 4rem 0; border-top: 1px solid var(--line); }
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    line-height: 1.2; letter-spacing: -0.015em;
+    margin: 0 0 1rem; font-weight: 700;
+  }
+  .block p { max-width: 38rem; }
+  .intro { color: var(--muted); margin: 0 0 2.5rem; }
+
+  .steps {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr; gap: 2rem;
+    counter-reset: step;
+  }
+  @media (min-width: 800px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } }
+  .steps li { counter-increment: step; border-top: 2px solid var(--ink); padding-top: 1rem; }
+  .steps li::before {
+    content: counter(step);
+    display: block; font-weight: 700; font-size: 1.5rem; margin-bottom: 0.35rem;
+  }
+  .steps h3 { font-size: 1.15rem; margin: 0 0 0.4rem; }
+  .steps p { margin: 0; color: var(--muted); }
+
+  .two-col { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+  @media (min-width: 800px) { .two-col { grid-template-columns: 1fr 1fr; gap: 4rem; } }
+  .plain-list { margin: 0; padding-left: 1.2rem; }
+  .plain-list li { margin-bottom: 0.75rem; max-width: 34rem; }
+
+  .contact { background: var(--ink); color: var(--sheet); }
+  .contact a { color: var(--sheet); }
+  .contact p { color: #C9D4D2; }
+  .contact .mail { font-size: clamp(1.3rem, 3vw, 1.75rem); font-weight: 500; color: var(--sheet); }
+
+  .site-footer { padding: 2rem 0; font-size: 0.95rem; color: var(--muted); }
+  .site-footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .site-footer nav { display: flex; gap: 1.5rem; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#">SimpleWork</a>
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <a href="#workshop">Workshop</a>
+      <a href="#ueber-mich">Über mich</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>KI-Workshops für kleine Betriebe in Marburg und Umgebung</h1>
+        <p class="lead">Ihre Mitarbeitenden lernen an ihren eigenen Aufgaben, wie sie ChatGPT und ähnliche Werkzeuge einsetzen und wann sie den Ergebnissen nicht trauen sollten.</p>
+        <a class="button" href="#kontakt">Erstgespräch vereinbaren</a>
+        <p class="hero-note">Das Erstgespräch ist kostenlos und unverbindlich.</p>
+      </div>
+
+      <figure class="sheet" style="margin:0">
+        <p class="sheet-meta">Kundenanfrage per E-Mail</p>
+        <p class="sheet-question">Haben Sie den Kombi aus der Anzeige noch? Und ist der Zahnriemen schon gemacht?</p>
+        <p class="sheet-meta">Antwortentwurf der KI</p>
+        <p class="sheet-answer">Guten Tag, vielen Dank für Ihre Anfrage. Das Fahrzeug ist noch verfügbar. <mark>Der Zahnriemen wurde bei 120.000 km gewechselt.</mark> Gerne vereinbaren wir eine Probefahrt.</p>
+        <p class="pen">Steht nirgends in den Unterlagen. Erst nachsehen.</p>
+        <figcaption class="sheet-caption">Die KI formuliert schnell und klingt sicher, auch dort, wo ihr die Information fehlt. Solche Stellen zu erkennen, ist ein fester Teil jedes Workshops.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="block" id="workshop">
+    <div class="wrap">
+      <h2>So läuft der Workshop ab</h2>
+      <p class="intro">Keine Folienschlacht und keine Vorführung von zwanzig Tools. Geübt wird mit den Texten, Anfragen und Abläufen, die in Ihrem Betrieb jede Woche anfallen.</p>
+      <ol class="steps">
+        <li>
+          <h3>Vorgespräch</h3>
+          <p>Wir klären, welche Aufgaben bei Ihnen regelmäßig Zeit kosten und wer am Workshop teilnimmt. Daraus entstehen die Übungen.</p>
+        </li>
+        <li>
+          <h3>Workshop vor Ort</h3>
+          <p>Ein halber Tag in Ihrem Betrieb. Die Teilnehmenden arbeiten selbst am Rechner, mit Beispielen aus ihrem Alltag.</p>
+        </li>
+        <li>
+          <h3>Nachbereitung</h3>
+          <p>Sie erhalten eine kurze schriftliche Zusammenfassung mit den Beispielen aus dem Workshop zum Nachschlagen.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap two-col">
+      <div>
+        <h2>Was Ihre Mitarbeitenden danach können</h2>
+        <ul class="plain-list">
+          <li>E-Mails, Antworten auf Kundenanfragen und kurze Texte mit KI vorbereiten und anschließend selbst überarbeiten.</li>
+          <li>Erfundene oder falsche Angaben in KI-Ergebnissen erkennen, bevor sie beim Kunden landen.</li>
+          <li>Einschätzen, welche Daten nicht in ein KI-Werkzeug gehören, etwa Kundendaten oder interne Zahlen.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Und danach</h2>
+        <p>Oft zeigt sich im Workshop, dass bestimmte Anfragen immer gleich ablaufen. Solche Fälle lassen sich automatisieren, zum Beispiel mit einem WhatsApp-Assistenten, der Standardfragen wie Öffnungszeiten beantwortet und alles andere an Sie weiterleitet.</p>
+        <p>Das ist ein eigenes Angebot und keine Voraussetzung für den Workshop.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ueber-mich">
+    <div class="wrap">
+      <h2>Über mich</h2>
+      <p>Ich bin Julian Petri. Vor dem Studium habe ich eine Ausbildung zum Automobilkaufmann abgeschlossen, betriebliche Abläufe kenne ich also aus eigener Arbeit. Danach habe ich Medienwissenschaften studiert und meine Abschlussarbeit über Vertrauen in KI geschrieben. Derzeit studiere ich im Master Medien und kulturelle Praxis an der Philipps-Universität Marburg.</p>
+      <p>Mich interessiert weniger, was KI alles kann, sondern wann man sich auf sie verlassen kann und wann nicht. Genau darum geht es im Workshop.</p>
+    </div>
+  </section>
+
+  <section class="block contact" id="kontakt">
+    <div class="wrap">
+      <h2>Kontakt</h2>
+      <p>Schreiben Sie mir kurz, um welchen Betrieb es geht und wie viele Personen teilnehmen würden. Ich melde mich innerhalb von zwei Werktagen.</p>
+        <a class="mail" href="mailto:julian.petri9@gmail.com?subject=Anfrage%20KI-Workshop">julian.petri9@gmail.com</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>SimpleWork, Julian Petri, Marburg</span>
+    <nav aria-label="Rechtliches">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
