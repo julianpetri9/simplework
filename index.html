@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SimpleWork | KI-Workshops für kleine Betriebe</title>
 <meta name="description" content="Praxisnahe KI-Workshops für kleine Betriebe in Marburg und Umgebung. Mitarbeitende lernen an eigenen Aufgaben, KI-Werkzeuge einzusetzen und deren Ergebnisse zu prüfen.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
   @font-face { font-family: "Schibsted Grotesk"; src: url("fonts/schibsted-grotesk-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
   @font-face { font-family: "Schibsted Grotesk"; src: url("fonts/schibsted-grotesk-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
@@ -45,7 +46,11 @@
     display: flex; align-items: center; justify-content: space-between;
     gap: 1rem; padding-top: 1.1rem; padding-bottom: 1.1rem;
   }
-  .brand { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; text-decoration: none; }
+  .brand { font-size: 1.375rem; letter-spacing: -0.03em; line-height: 1; text-decoration: none; color: var(--ink); white-space: nowrap; }
+  .brand b { font-weight: 700; }
+  .brand span { font-weight: 400; color: var(--muted); }
+  .brand .i { position: relative; display: inline-block; }
+  .brand .i svg { position: absolute; left: 50%; top: -0.08em; width: 0.42em; height: 0.42em; margin-left: -0.17em; overflow: visible; }
   .site-nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
   .site-nav a { text-decoration: none; color: var(--muted); font-weight: 500; }
   .site-nav a:hover { color: var(--ink); }
@@ -144,14 +149,72 @@
   .site-footer { padding: 2rem 0; font-size: 0.95rem; color: var(--muted); }
   .site-footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
   .site-footer nav { display: flex; gap: 1.5rem; }
+
+  /* Zweites Blatt hinter dem Beispiel */
+  .sheet-stack { position: relative; padding: 1rem 0 1rem 1rem; }
+  .sheet-stack::before {
+    content: ""; position: absolute; top: 0; right: 1.5rem; bottom: 2rem; left: 0;
+    background: var(--sheet); border: 1px solid var(--line); border-radius: 4px;
+    transform: rotate(-2.5deg);
+  }
+
+  /* Beispiele */
+  .examples { background: #EAEFED; }
+  .example-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.5rem; align-items: start;
+  }
+  .example {
+    margin: 0; background: var(--sheet); border: 1px solid var(--line); border-radius: 4px;
+    padding: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem;
+  }
+  .tag {
+    align-self: flex-start; font-size: 0.8rem; font-weight: 500;
+    background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 0.1rem 0.65rem;
+  }
+  .example .sheet-meta { margin: 0.35rem 0 0; }
+  .example p { margin: 0; font-size: 1rem; }
+  .example .pen { font-size: 1.2rem; margin: 0.35rem 0 0 0.75rem; }
+
+  /* Ablauf mit Symbolen */
+  .steps li { border-top: 0; padding-top: 0; }
+  .steps li::before { content: none; }
+  .step-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
+  .step-icon {
+    flex: none; width: 3.5rem; height: 3.5rem; border-radius: 50%;
+    border: 2px solid var(--ink); background: var(--sheet);
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .step-icon.active { background: var(--marker); }
+  .step-icon svg { width: 1.6rem; height: 1.6rem; }
+  .step-line { flex: 1; height: 2px; background: var(--line); }
+  .step-no { margin: 0 0 0.3rem; font-size: 0.9rem; font-weight: 700; color: var(--muted); }
+
+  /* Prüffragen */
+  .check-card {
+    background: var(--sheet); border: 1px solid var(--line); border-radius: 4px;
+    padding: 1.75rem 2rem; transform: rotate(1deg);
+  }
+  .check-card h3 { font-family: var(--hand); font-weight: 400; font-size: 1.5rem; margin: 0 0 1rem; }
+  .check-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.1rem; }
+  .check-list li { display: flex; gap: 0.9rem; align-items: flex-start; }
+  .box {
+    flex: none; width: 1.5rem; height: 1.5rem; margin-top: 0.15rem;
+    border: 2px solid var(--ink); border-radius: 3px; position: relative;
+  }
+  .box svg { position: absolute; left: -1px; top: -6px; width: 1.6rem; height: 1.6rem; overflow: visible; }
+  .check-list strong { display: block; }
+  .check-list span { color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { .check-card, .sheet-stack::before { transform: none; } }
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="#">SimpleWork</a>
+    <a class="brand" href="#" aria-label="SimpleWork Startseite"><b>S</b><span class="i">ı<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12 C5 13 7 15.5 9 19.5 C12 11 16 6 22 2" fill="none" stroke="#B42318" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>mple</span><b>W</b><span>ork</span></a>
     <nav class="site-nav" aria-label="Hauptnavigation">
+      <a href="#beispiele">Beispiele</a>
       <a href="#workshop">Workshop</a>
       <a href="#ueber-mich">Über mich</a>
       <a href="#kontakt">Kontakt</a>
@@ -169,6 +232,7 @@
         <p class="hero-note">Das Erstgespräch ist kostenlos und unverbindlich.</p>
       </div>
 
+      <div class="sheet-stack">
       <figure class="sheet" style="margin:0">
         <p class="sheet-meta">Kundenanfrage per E-Mail</p>
         <p class="sheet-question">Haben Sie den Kombi aus der Anzeige noch? Und ist der Zahnriemen schon gemacht?</p>
@@ -177,6 +241,34 @@
         <p class="pen">Steht nirgends in den Unterlagen. Erst nachsehen.</p>
         <figcaption class="sheet-caption">Die KI formuliert schnell und klingt sicher, auch dort, wo ihr die Information fehlt. Solche Stellen zu erkennen, ist ein fester Teil jedes Workshops.</figcaption>
       </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block examples" id="beispiele">
+    <div class="wrap">
+      <h2>Drei Stellen, an denen es im Alltag hakt</h2>
+      <p class="intro">Die Beispiele zeigen, welche Art von Fehlern im Workshop geübt wird. Im Workshop selbst arbeiten wir mit Texten aus Ihrem Betrieb.</p>
+      <div class="example-grid">
+        <figure class="example">
+          <span class="tag">Erfundene Leistung</span>
+          <p class="sheet-meta">Angebotstext, Badsanierung</p>
+          <p>Das Angebot umfasst Demontage, Fliesenarbeiten und die Montage der Sanitärobjekte, <mark>inklusive Entsorgung des Altmaterials.</mark></p>
+          <p class="pen">Nicht kalkuliert. Streichen oder Preis anpassen.</p>
+        </figure>
+        <figure class="example">
+          <span class="tag">Anweisung missverstanden</span>
+          <p class="sheet-meta">Instagram-Beitrag, Café. Auftrag: längere Öffnungszeit am Donnerstag ankündigen</p>
+          <p>Gute Nachrichten für alle Nachteulen: <mark>Ab sofort sind wir täglich bis 20 Uhr für euch da.</mark></p>
+          <p class="pen">Nur donnerstags. So nicht posten.</p>
+        </figure>
+        <figure class="example">
+          <span class="tag">Daten im Prompt</span>
+          <p class="sheet-meta">Eingabe in ein KI-Werkzeug</p>
+          <p>Fasse diese Reklamation kurz zusammen: <mark>Herr Thomas Weber, Kundennummer 40213,</mark> beschwert sich über die verspätete Lieferung …</p>
+          <p class="pen">Name und Nummer vorher raus.</p>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -186,18 +278,41 @@
       <p class="intro">Keine Folienschlacht und keine Vorführung von zwanzig Tools. Geübt wird mit den Texten, Anfragen und Abläufen, die in Ihrem Betrieb jede Woche anfallen.</p>
       <ol class="steps">
         <li>
+          <div class="step-head"><span class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="step-line"></span></div>
+          <p class="step-no">Schritt 1</p>
           <h3>Vorgespräch</h3>
           <p>Wir klären, welche Aufgaben bei Ihnen regelmäßig Zeit kosten und wer am Workshop teilnimmt. Daraus entstehen die Übungen.</p>
         </li>
         <li>
+          <div class="step-head"><span class="step-icon active"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/><path d="M7 9l2.5 2.5L7 14M12 13h4"/></svg></span><span class="step-line"></span></div>
+          <p class="step-no">Schritt 2</p>
           <h3>Workshop vor Ort</h3>
           <p>Ein halber Tag in Ihrem Betrieb. Die Teilnehmenden arbeiten selbst am Rechner, mit Beispielen aus ihrem Alltag.</p>
         </li>
         <li>
+          <div class="step-head"><span class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h5"/></svg></span></div>
+          <p class="step-no">Schritt 3</p>
           <h3>Nachbereitung</h3>
           <p>Sie erhalten eine kurze schriftliche Zusammenfassung mit den Beispielen aus dem Workshop zum Nachschlagen.</p>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap two-col" style="align-items:center">
+      <div>
+        <h2>Drei Fragen vor dem Absenden</h2>
+        <p>Wer mit KI arbeitet, muss nicht jede Technik verstehen. Es reicht, vor jedem Absenden kurz zu prüfen. Diese drei Fragen ziehen sich durch alle Übungen im Workshop.</p>
+      </div>
+      <div class="check-card">
+        <h3>Vor dem Absenden</h3>
+        <ul class="check-list">
+          <li><span class="box"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 13 C6 14 8 16 10 19 C13 12 17 7 22 3" fill="none" stroke="#B42318" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p style="margin:0"><strong>Steht das in unseren Unterlagen?</strong><span>Jede Zahl, jedes Datum, jede Zusage.</span></p></li>
+          <li><span class="box"></span><p style="margin:0"><strong>Macht der Text, was ich wollte?</strong><span>Auftrag und Ergebnis nebeneinanderlegen.</span></p></li>
+          <li><span class="box"></span><p style="margin:0"><strong>Gehört das überhaupt ins Tool?</strong><span>Kundendaten und interne Zahlen bleiben draußen.</span></p></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -222,7 +337,7 @@
   <section class="block" id="ueber-mich">
     <div class="wrap">
       <h2>Über mich</h2>
-      <p>Ich bin Julian Petri. Vor dem Studium habe ich eine Ausbildung zum Automobilkaufmann abgeschlossen, betriebliche Abläufe kenne ich also aus eigener Arbeit. Danach habe ich Medienwissenschaften studiert und meine Abschlussarbeit über Vertrauen in KI geschrieben. Derzeit studiere ich im Master Medien und kulturelle Praxis an der Philipps-Universität Marburg.</p>
+      <p>Bevor ich studiert habe, war ich Automobilkaufmann. Wie Anfragen, Angebote und Absprachen in einem Betrieb laufen, kenne ich also aus eigener Arbeit. Danach habe ich Medienwissenschaften studiert und meine Abschlussarbeit über Vertrauen in KI geschrieben. Derzeit studiere ich im Master Medien und kulturelle Praxis an der Philipps-Universität Marburg.</p>
       <p>Mich interessiert weniger, was KI alles kann, sondern wann man sich auf sie verlassen kann und wann nicht. Genau darum geht es im Workshop.</p>
     </div>
   </section>

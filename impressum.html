@@ -6,6 +6,7 @@
 <title>Impressum | SimpleWork</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="Praxisnahe KI-Workshops für kleine Betriebe in Marburg und Umgebung. Mitarbeitende lernen an eigenen Aufgaben, KI-Werkzeuge einzusetzen und deren Ergebnisse zu prüfen.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
   @font-face { font-family: "Schibsted Grotesk"; src: url("fonts/schibsted-grotesk-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
   @font-face { font-family: "Schibsted Grotesk"; src: url("fonts/schibsted-grotesk-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
@@ -46,7 +47,11 @@
     display: flex; align-items: center; justify-content: space-between;
     gap: 1rem; padding-top: 1.1rem; padding-bottom: 1.1rem;
   }
-  .brand { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; text-decoration: none; }
+  .brand { font-size: 1.375rem; letter-spacing: -0.03em; line-height: 1; text-decoration: none; color: var(--ink); white-space: nowrap; }
+  .brand b { font-weight: 700; }
+  .brand span { font-weight: 400; color: var(--muted); }
+  .brand .i { position: relative; display: inline-block; }
+  .brand .i svg { position: absolute; left: 50%; top: -0.08em; width: 0.42em; height: 0.42em; margin-left: -0.17em; overflow: visible; }
   .site-nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
   .site-nav a { text-decoration: none; color: var(--muted); font-weight: 500; }
   .site-nav a:hover { color: var(--ink); }
@@ -160,7 +165,7 @@
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html">SimpleWork</a>
+    <a class="brand" href="index.html" aria-label="SimpleWork Startseite"><b>S</b><span class="i">ı<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12 C5 13 7 15.5 9 19.5 C12 11 16 6 22 2" fill="none" stroke="#B42318" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>mple</span><b>W</b><span>ork</span></a>
     <nav class="site-nav" aria-label="Hauptnavigation">
       <a href="index.html#workshop">Workshop</a>
       <a href="index.html#ueber-mich">Über mich</a>
