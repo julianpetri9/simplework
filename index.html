@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SimpleWork | KI-Beratung, Workshops und Agenten für kleine Betriebe</title>
-<meta name="description" content="SimpleWork zeigt kleinen Betrieben, welche Aufgaben sich mit KI lösen lassen, schult Teams und baut KI-Agenten und Automatisierungen. Vor Ort in Marburg und Umgebung oder online.">
+<title>KI abgehakt | KI-Beratung, Workshops und Agenten für kleine Betriebe</title>
+<meta name="description" content="KI abgehakt zeigt kleinen Betrieben, welche Aufgaben sich mit KI lösen lassen, schult Teams und baut KI-Agenten und Automatisierungen. Vor Ort in Marburg und Umgebung oder online.">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="format-detection" content="telephone=no">
 <link rel="canonical" href="https://julianpetri9.github.io/simplework/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
-<meta property="og:title" content="SimpleWork | KI, die Ihrem Betrieb Arbeit abnimmt">
+<meta property="og:title" content="KI abgehakt | KI, die Ihrem Betrieb Arbeit abnimmt">
+<meta property="og:site_name" content="KI abgehakt">
 <meta property="og:description" content="Beratung, Workshops und KI-Agenten für kleine Betriebe.">
 <meta property="og:url" content="https://julianpetri9.github.io/simplework/">
 <link rel="preload" href="fonts/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -94,10 +95,11 @@ svg{display:block}
 .nav__links a{text-decoration:none;padding-block:.6rem;transition:color .2s}
 .nav__links a:hover{color:var(--fg)}
 .nav__bar{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--fg);transform-origin:left;transform:scaleX(0)}
-.brand{font-size:1.32rem;letter-spacing:-.03em;font-weight:400;color:var(--fg-2);text-decoration:none;white-space:nowrap;line-height:1;padding-block:.6rem}
+.brand{display:inline-flex;align-items:center;gap:.5rem;font-size:1.28rem;letter-spacing:-.03em;font-weight:400;color:var(--fg-2);text-decoration:none;white-space:nowrap;line-height:1;padding-block:.6rem}
 .brand b{font-weight:800;color:var(--fg)}
-.brand__i{position:relative;display:inline-block}
-.brand__i svg{position:absolute;left:50%;top:-.08em;width:.42em;height:.42em;margin-left:-.17em;overflow:visible;fill:none;stroke:var(--pen);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.brand__box{width:1.05em;height:1.05em;border:1.5px solid var(--fg);border-radius:3px;display:grid;place-items:center;flex:none}
+.brand__box svg{width:1.05em;height:1.05em;overflow:visible;fill:none;stroke:var(--pen);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.brand__box path{stroke-dasharray:1;stroke-dashoffset:0}
 .nav__end{display:flex;align-items:center;gap:.6rem}
 .nav__menu{display:none;width:2.75rem;height:2.75rem;padding:0;border:1px solid var(--line-2);border-radius:50%;background:var(--card);place-items:center;align-content:center;gap:5px}
 .nav__menu span{display:block;width:1.05rem;height:1.5px;background:var(--fg);transition:transform .25s var(--ease)}
@@ -108,7 +110,7 @@ svg{display:block}
 .nav__panel a:last-child{border-bottom:0}
 @media (max-width:900px){.nav__links{display:none} .nav__menu{display:grid}}
 @media (min-width:901px){.nav__panel{display:none}}
-@media (max-width:380px){.nav .btn--sm{padding-inline:.85rem;font-size:.86rem}}
+@media (max-width:380px){.nav .btn--sm{padding-inline:.85rem;font-size:.86rem} .brand{font-size:1.14rem;gap:.42rem}}
 
 /* Hero */
 .hero{position:relative}
@@ -463,6 +465,7 @@ input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 8px rgba(24,48,47
 /* Bewegung */
 @keyframes in{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @keyframes swipe{from{background-size:0% 86%}to{background-size:100% 86%}}
+@keyframes tick{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 @keyframes shim{from{background-position:200% 0}to{background-position:-200% 0}}
 @keyframes scan{0%{opacity:0;transform:translateY(-2.6rem)}12%{opacity:1}88%{opacity:1}100%{opacity:0;transform:translateY(var(--scan-h,12rem))}}
@@ -486,6 +489,7 @@ input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 8px rgba(24,48,47
 @media (prefers-reduced-motion:no-preference){
   .in{animation:in .75s var(--ease) both;animation-delay:calc(var(--i,0)*70ms + 40ms)}
   .h1 mark{animation:swipe .65s .6s var(--ease) backwards}
+  .brand__box path{animation:tick .5s .35s var(--ease) backwards}
   .flow__gate{--gate-h:8rem}
   .flow__gate::after{opacity:1;animation:gate 2.2s ease-in-out infinite alternate}
   .g-hit--1{animation:ghit1 7s var(--ease) infinite}
@@ -528,7 +532,7 @@ input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 8px rgba(24,48,47
 
 <header class="nav">
   <div class="wrap nav__in">
-    <a class="brand" href="#top" aria-label="SimpleWork, zum Seitenanfang"><b>S</b><span class="brand__i">ı<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12 C5 13 7 15.5 9 19.5 C12 11 16 6 22 2"></path></svg></span>mple<b>W</b>ork</a>
+    <a class="brand" href="#top" aria-label="KI abgehakt, zum Seitenanfang"><span class="brand__box" aria-hidden="true"><svg viewBox="0 0 24 24"><path pathLength="1" d="M4 13 C6 14 8 16 10 19 C13 12 17 7 22 3"></path></svg></span><span><b>KI</b> abgehakt</span></a>
     <nav class="nav__links" aria-label="Hauptnavigation">
       <a href="#einsatz">Einsatzfelder</a>
       <a href="#angebot">Angebot</a>
@@ -954,6 +958,7 @@ input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 8px rgba(24,48,47
         <p class="rv">Ich bin Julian Petri. Vor dem Studium war ich Automobilkaufmann. Wie Anfragen, Angebote und Absprachen in einem Betrieb laufen, kenne ich aus eigener Arbeit.</p>
         <p class="rv">Danach habe ich Medienwissenschaften studiert und meine Abschlussarbeit über Vertrauen in KI geschrieben. Heute studiere ich im Master an der Philipps-Universität Marburg.</p>
         <p class="rv">Mit KI arbeite ich jeden Tag. Ich baue Agenten und Automatisierungen, schreibe und recherchiere mit KI und produziere eigene Videoreihen, die vom Skript bis zum fertigen Clip mit KI entstehen.</p>
+        <p class="rv">Der Name ist das Ziel: Nach unserer Zusammenarbeit soll das Thema KI in Ihrem Betrieb abgehakt sein. Geklärt, eingerichtet und im Alltag angekommen.</p>
         <blockquote class="about__q rv">Mich interessiert weniger, was KI alles kann, als die Frage, wann man sich auf sie verlassen kann.</blockquote>
       </div>
     </div>
@@ -1007,7 +1012,7 @@ input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 8px rgba(24,48,47
       <div class="mail rv">
         <span class="mail__addr" id="mailAddr">julian.petri9@gmail.com</span>
         <button type="button" class="btn" id="mailCopy"><span>Adresse kopieren</span></button>
-        <a class="btn btn--ghost" href="mailto:julian.petri9@gmail.com?subject=Anfrage%20SimpleWork">E-Mail schreiben</a>
+        <a class="btn btn--ghost" href="mailto:julian.petri9@gmail.com?subject=Anfrage%20KI%20abgehakt">E-Mail schreiben</a>
       </div>
     </div>
   </section>
@@ -1015,7 +1020,7 @@ input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 8px rgba(24,48,47
 
 <footer class="foot">
   <div class="wrap foot__in">
-    <span>SimpleWork · Julian Petri · Marburg</span>
+    <span>KI abgehakt · Julian Petri · Marburg</span>
     <span>Mit KI gebaut, von Hand geprüft.</span>
     <nav aria-label="Rechtliches">
       <a href="impressum.html">Impressum</a>

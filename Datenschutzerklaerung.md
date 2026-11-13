@@ -5,7 +5,7 @@
 Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website ist:
 
 Julian Petri
-SimpleWork
+KI abgehakt
 Am Grün 35A
 35037 Marburg
 E-Mail: julian.petri9@gmail.com
