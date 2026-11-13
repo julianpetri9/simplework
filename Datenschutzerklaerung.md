@@ -32,7 +32,7 @@ Wenn Sie mir eine E-Mail schreiben, verarbeite ich Ihre E-Mail-Adresse, Ihren Na
 
 Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, wenn Ihre Anfrage mit einem Vertrag oder dessen Anbahnung zusammenhängt, etwa der Buchung eines Workshops. In allen übrigen Fällen ist Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes Interesse liegt in der Beantwortung Ihrer Anfrage.
 
-Für E-Mails nutze ich den Dienst mailbox.org der Heinlein Hosting GmbH, Schwedter Straße 8/9A, 10119 Berlin. Ihre Nachricht wird daher auf Servern dieses Anbieters gespeichert, die nach dessen Angaben in Deutschland stehen.
+Für E-Mails nutze ich den Dienst mailbox.org der Heinlein Hosting GmbH, Schwedter Straße 8/9A, 10119 Berlin. Ihre Nachricht wird daher auf Servern dieses Anbieters gespeichert, die nach dessen Angaben in Deutschland stehen. Mit dem Anbieter besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.
 
 Ich lösche Ihre Daten, sobald sie für die Bearbeitung Ihrer Anfrage nicht mehr erforderlich sind. Gesetzliche Aufbewahrungspflichten, insbesondere nach Handels- und Steuerrecht, bleiben davon unberührt.
 
