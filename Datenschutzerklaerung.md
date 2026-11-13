@@ -8,7 +8,7 @@ Julian Petri
 KI abgehakt
 Am Grün 35A
 35037 Marburg
-E-Mail: julian.petri9@gmail.com
+E-Mail: julian@ki-abgehakt.de
 
 ## 2. Überblick
 
@@ -32,7 +32,7 @@ Wenn Sie mir eine E-Mail schreiben, verarbeite ich Ihre E-Mail-Adresse, Ihren Na
 
 Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, wenn Ihre Anfrage mit einem Vertrag oder dessen Anbahnung zusammenhängt, etwa der Buchung eines Workshops. In allen übrigen Fällen ist Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes Interesse liegt in der Beantwortung Ihrer Anfrage.
 
-Für E-Mails nutze ich den Dienst Gmail der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Ihre Nachricht wird daher auf Servern von Google gespeichert. Eine Übermittlung in die USA ist dabei möglich. Google nimmt nach eigenen Angaben am EU-U.S. Data Privacy Framework teil.
+Für E-Mails nutze ich den Dienst mailbox.org der Heinlein Hosting GmbH, Schwedter Straße 8/9A, 10119 Berlin. Ihre Nachricht wird daher auf Servern dieses Anbieters gespeichert, die nach dessen Angaben in Deutschland stehen.
 
 Ich lösche Ihre Daten, sobald sie für die Bearbeitung Ihrer Anfrage nicht mehr erforderlich sind. Gesetzliche Aufbewahrungspflichten, insbesondere nach Handels- und Steuerrecht, bleiben davon unberührt.
 
@@ -52,4 +52,4 @@ Gustav-Stresemann-Ring 1
 
 ## 6. Stand
 
-Diese Datenschutzerklärung hat den Stand Oktober 2026. Ich passe sie an, wenn sich die Website oder die rechtlichen Vorgaben ändern.
+Diese Datenschutzerklärung hat den Stand November 2026. Ich passe sie an, wenn sich die Website oder die rechtlichen Vorgaben ändern.
