@@ -3,357 +3,1020 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SimpleWork | KI-Workshops für kleine Betriebe</title>
-<meta name="description" content="Praxisnahe KI-Workshops für kleine Betriebe in Marburg und Umgebung. Mitarbeitende lernen an eigenen Aufgaben, KI-Werkzeuge einzusetzen und deren Ergebnisse zu prüfen.">
+<title>SimpleWork | KI-Beratung, Workshops und Agenten für kleine Betriebe</title>
+<meta name="description" content="SimpleWork zeigt kleinen Betrieben, welche Aufgaben sich mit KI lösen lassen, schult Teams und baut KI-Agenten und Automatisierungen. Vor Ort in Marburg und Umgebung oder online.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://julianpetri9.github.io/simplework/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="SimpleWork | KI, die Ihrem Betrieb Arbeit abnimmt">
+<meta property="og:description" content="Beratung, Workshops und KI-Agenten für kleine Betriebe.">
+<meta property="og:url" content="https://julianpetri9.github.io/simplework/">
+<link rel="preload" href="fonts/schibsted-grotesk-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/schibsted-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  @font-face { font-family: "Schibsted Grotesk"; src: url("fonts/schibsted-grotesk-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-  @font-face { font-family: "Schibsted Grotesk"; src: url("fonts/schibsted-grotesk-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
-  @font-face { font-family: "Schibsted Grotesk"; src: url("fonts/schibsted-grotesk-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
-  @font-face { font-family: "Kalam"; src: url("fonts/kalam-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-  :root {
-    --paper: #F4F6F5;
-    --sheet: #FFFFFF;
-    --ink: #18302F;
-    --muted: #566563;
-    --line: #D5DCDA;
-    --marker: #F5DC5A;
-    --pen: #B42318;
-    --sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
-    --hand: "Kalam", "Comic Sans MS", cursive;
-  }
-  *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 1.0625rem;
-    line-height: 1.6;
-  }
-  a { color: var(--ink); text-underline-offset: 3px; }
-  a:focus-visible, .button:focus-visible {
-    outline: 3px solid var(--ink);
-    outline-offset: 3px;
-  }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+@font-face{font-family:"Schibsted Grotesk";src:url("fonts/schibsted-grotesk-latin-400-normal.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Schibsted Grotesk";src:url("fonts/schibsted-grotesk-latin-500-normal.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Schibsted Grotesk";src:url("fonts/schibsted-grotesk-latin-600-normal.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Schibsted Grotesk";src:url("fonts/schibsted-grotesk-latin-700-normal.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Schibsted Grotesk";src:url("fonts/schibsted-grotesk-latin-800-normal.woff2") format("woff2");font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url("fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url("fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Kalam";src:url("fonts/kalam-latin-400-normal.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+</style>
+<style>
+/* Layout: eine linksbuendige Spalte auf Weiss, Schrift in Petrol. Maschine spricht Mono, der Mensch schreibt von Hand in Rot, Textmarker-Gelb markiert, was geprueft werden muss. */
+:root{
+  color-scheme:light;
+  --bg:#FFFFFF; --bg-2:#F4F6F5; --bg-3:#E9EEEC; --card:#FFFFFF;
+  --line:#E1E7E5; --line-2:#C9D3D0;
+  --fg:#18302F; --fg-2:#4A5C59; --fg-3:#5F706C;
+  --petrol:#1F5E58;
+  --mark:#F5DC5A; --mark-d:#C4A91E; --pen:#B42318; --ok:#0B7A5E;
+  --shadow:0 1px 2px rgba(24,48,47,.05),0 18px 44px -26px rgba(24,48,47,.32);
+  --f-sans:"Schibsted Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --f-hand:"Kalam","Segoe Print","Bradley Hand",cursive;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 1.0625rem/1.6 var(--f-sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+::selection{background:var(--mark);color:var(--fg)}
+h1,h2,h3,p,ul,ol,dl,dd,dt,figure,blockquote{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+svg{display:block}
+:focus-visible{outline:2px solid var(--petrol);outline-offset:3px;border-radius:4px}
+[id]{scroll-margin-top:4.6rem}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:max(20px, env(safe-area-inset-left, 0px));padding-right:max(20px, env(safe-area-inset-right, 0px))}
 
-  /* Kopfzeile */
-  .site-header { border-bottom: 1px solid var(--line); }
-  .site-header .wrap {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 1rem; padding-top: 1.1rem; padding-bottom: 1.1rem;
-  }
-  .brand { font-size: 1.375rem; letter-spacing: -0.03em; line-height: 1; text-decoration: none; color: var(--ink); white-space: nowrap; }
-  .brand b { font-weight: 700; }
-  .brand span { font-weight: 400; color: var(--muted); }
-  .brand .i { position: relative; display: inline-block; }
-  .brand .i svg { position: absolute; left: 50%; top: -0.08em; width: 0.42em; height: 0.42em; margin-left: -0.17em; overflow: visible; }
-  .site-nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .site-nav a { text-decoration: none; color: var(--muted); font-weight: 500; }
-  .site-nav a:hover { color: var(--ink); }
+/* Typo */
+.h1{font-size:clamp(2.55rem,5.3vw,4.4rem);line-height:1.03;letter-spacing:-.035em;font-weight:800;text-wrap:balance}
+.h2{font-size:clamp(1.95rem,4vw,3.25rem);line-height:1.06;letter-spacing:-.03em;font-weight:700;text-wrap:balance;max-width:20ch}
+.h3{font-size:1.3rem;line-height:1.25;letter-spacing:-.015em;font-weight:700}
+.lead{font-size:clamp(1.05rem,1.5vw,1.2rem);color:var(--fg-2);max-width:38rem}
+.lbl{font:500 .72rem/1.45 var(--f-mono);letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3)}
+.hand{font-family:var(--f-hand);color:var(--pen);line-height:1.3}
+.eyebrow{display:flex;align-items:center;gap:.75rem;font:500 .72rem/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--fg-2)}
+.eyebrow::before{content:"";width:1.5rem;height:.5rem;background:var(--mark);border-radius:1px;flex:none}
+.hl{color:var(--fg);background:linear-gradient(var(--mark),var(--mark)) no-repeat 0 55%/100% 84%;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .07em;margin:0 -.07em;border-radius:2px;transition:background-size .6s var(--ease)}
 
-  /* Einstieg */
-  .hero { padding: 4.5rem 0 4rem; }
-  .hero .wrap {
-    display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center;
-  }
-  @media (min-width: 900px) {
-    .hero .wrap { grid-template-columns: 1.05fr 1fr; gap: 4rem; }
-  }
-  h1 {
-    font-size: clamp(2.1rem, 4.6vw, 3.2rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    font-weight: 700;
-    margin: 0 0 1.25rem;
-    max-width: 16ch;
-  }
-  .lead { font-size: 1.2rem; color: var(--muted); max-width: 34rem; margin: 0 0 2rem; }
-  .button {
-    display: inline-block;
-    background: var(--ink); color: var(--sheet);
-    padding: 0.85rem 1.4rem; border-radius: 6px;
-    text-decoration: none; font-weight: 500;
-  }
-  .button:hover { background: #24453F; }
-  .hero-note { margin-top: 1rem; font-size: 0.95rem; color: var(--muted); }
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:2.9rem;padding:.7rem 1.35rem;border-radius:999px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);font-weight:600;font-size:.98rem;line-height:1.2;text-decoration:none;transition:transform .25s var(--ease),box-shadow .25s,border-color .2s,background .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -14px rgba(24,48,47,.55)}
+.btn svg{width:1em;height:1em;flex:none;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn--ghost{background:var(--card);color:var(--fg);border-color:var(--line-2)}
+.btn--ghost:hover{border-color:var(--fg);box-shadow:none}
+.btn--sm{min-height:2.75rem;padding:.5rem 1.05rem;font-size:.9rem}
+.link{display:inline-flex;align-items:center;gap:.5rem;min-height:2.75rem;font-weight:600;text-decoration:none;background:linear-gradient(var(--fg),var(--fg)) no-repeat 0 82%/100% 1px}
+.link svg{width:1em;height:1em;transition:transform .25s var(--ease)}
+.link:hover svg{transform:translateX(4px)}
+.tag{display:inline-flex;align-items:center;font:500 .68rem/1 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;padding:.5rem .7rem;border:1px solid var(--line-2);border-radius:999px;color:var(--fg-2);background:var(--card)}
+.chip{display:inline-flex;align-items:center;gap:.5rem;font:500 .68rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2);padding:.45rem .65rem;border:1px solid var(--line-2);border-radius:999px;white-space:nowrap;transition:color .3s,border-color .3s,background .3s}
+.chip i{width:.42rem;height:.42rem;border-radius:50%;background:currentColor;flex:none}
+.chip[data-tone="busy"]{color:var(--fg)}
+.chip[data-tone="busy"] i{animation:pulse 1s infinite}
+.chip[data-tone="warn"]{color:var(--fg);background:var(--mark);border-color:var(--mark)}
+.chip[data-tone="ok"]{color:var(--ok);border-color:rgba(11,122,94,.4)}
 
-  /* Das Beispielblatt */
-  .sheet {
-    background: var(--sheet);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 1.75rem 1.75rem 2rem;
-    position: relative;
-  }
-  .sheet-meta { font-size: 0.9rem; color: var(--muted); margin: 0 0 0.35rem; }
-  .sheet-question {
-    margin: 0 0 1.5rem; padding-bottom: 1.25rem;
-    border-bottom: 1px dashed var(--line);
-  }
-  .sheet-answer { margin: 0; }
-  mark {
-    background: linear-gradient(transparent 12%, var(--marker) 12%, var(--marker) 88%, transparent 88%);
-    color: inherit; padding: 0 0.1em;
-  }
-  .pen {
-    font-family: var(--hand);
-    color: var(--pen);
-    font-size: 1.3rem;
-    line-height: 1.3;
-    margin: 1rem 0 0 1.25rem;
-    transform: rotate(-2deg);
-    transform-origin: left;
-    border-left: 2px solid var(--pen);
-    padding-left: 0.75rem;
-  }
-  .sheet-caption { font-size: 0.95rem; color: var(--muted); margin: 1rem 0 0; max-width: 34rem; }
+/* Navigation */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(255,255,255,.84);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:3.75rem}
+.nav__links{display:flex;gap:1.7rem;font-size:.92rem;color:var(--fg-2)}
+.nav__links a{text-decoration:none;padding-block:.6rem;transition:color .2s}
+.nav__links a:hover{color:var(--fg)}
+.nav__bar{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--fg);transform-origin:left;transform:scaleX(0)}
+.brand{font-size:1.32rem;letter-spacing:-.03em;font-weight:400;color:var(--fg-2);text-decoration:none;white-space:nowrap;line-height:1;padding-block:.6rem}
+.brand b{font-weight:800;color:var(--fg)}
+.brand__i{position:relative;display:inline-block}
+.brand__i svg{position:absolute;left:50%;top:-.08em;width:.42em;height:.42em;margin-left:-.17em;overflow:visible;fill:none;stroke:var(--pen);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.nav__end{display:flex;align-items:center;gap:.6rem}
+.nav__menu{display:none;width:2.75rem;height:2.75rem;padding:0;border:1px solid var(--line-2);border-radius:50%;background:var(--card);place-items:center;align-content:center;gap:5px}
+.nav__menu span{display:block;width:1.05rem;height:1.5px;background:var(--fg);transition:transform .25s var(--ease)}
+.nav__menu[aria-expanded="true"] span:first-child{transform:translateY(3.25px) rotate(45deg)}
+.nav__menu[aria-expanded="true"] span:last-child{transform:translateY(-3.25px) rotate(-45deg)}
+.nav__panel{position:absolute;left:0;right:0;top:100%;background:var(--bg);border-block:1px solid var(--line);box-shadow:0 24px 40px -28px rgba(24,48,47,.45)}
+.nav__panel a{display:flex;align-items:center;min-height:3.25rem;font-size:1.08rem;font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
+.nav__panel a:last-child{border-bottom:0}
+@media (max-width:900px){.nav__links{display:none} .nav__menu{display:grid}}
+@media (min-width:901px){.nav__panel{display:none}}
+@media (max-width:380px){.nav .btn--sm{padding-inline:.85rem;font-size:.86rem}}
 
-  /* Abschnitte */
-  section.block { padding: 4rem 0; border-top: 1px solid var(--line); }
-  h2 {
-    font-size: clamp(1.6rem, 3vw, 2rem);
-    line-height: 1.2; letter-spacing: -0.015em;
-    margin: 0 0 1rem; font-weight: 700;
-  }
-  .block p { max-width: 38rem; }
-  .intro { color: var(--muted); margin: 0 0 2.5rem; }
+/* Hero */
+.hero{position:relative}
+.hero__in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,4.5vw,4rem);align-items:center;padding-block:clamp(3rem,6vw,5rem) clamp(2.4rem,4.5vw,3.6rem)}
+.hero__copy{display:grid;gap:1.5rem;justify-items:start;min-width:0}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+.hero__note{font-size:.9rem;color:var(--fg-3)}
+.h1 mark{color:inherit;background:linear-gradient(var(--mark),var(--mark)) no-repeat 0 60%/100% 86%;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .08em;margin:0 -.08em;border-radius:.05em}
+@media (max-width:900px){.hero__in{grid-template-columns:minmax(0,1fr)} .feed{justify-self:stretch;max-width:none}}
+@media (max-width:420px){.h1{font-size:clamp(2.2rem,10.6vw,2.7rem)} .hero__in{padding-top:2.4rem}}
 
-  .steps {
-    list-style: none; margin: 0; padding: 0;
-    display: grid; grid-template-columns: 1fr; gap: 2rem;
-    counter-reset: step;
-  }
-  @media (min-width: 800px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } }
-  .steps li { counter-increment: step; border-top: 2px solid var(--ink); padding-top: 1rem; }
-  .steps li::before {
-    content: counter(step);
-    display: block; font-weight: 700; font-size: 1.5rem; margin-bottom: 0.35rem;
-  }
-  .steps h3 { font-size: 1.15rem; margin: 0 0 0.4rem; }
-  .steps p { margin: 0; color: var(--muted); }
+/* Aufgabenliste im Hero */
+.feed{position:relative;justify-self:end;width:100%;max-width:35rem;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 1px 2px rgba(24,48,47,.05),0 30px 70px -34px rgba(24,48,47,.4)}
+.feed__bar,.feed__foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 1.15rem}
+.feed__bar{border-bottom:1px solid var(--line)}
+.feed__foot{border-top:1px solid var(--line)}
+.feed__list{display:grid;transition:opacity .4s}
+.feed[data-run="out"] .feed__list{opacity:0}
+.task{display:grid;grid-template-columns:4.2rem minmax(0,1fr) auto;gap:.15rem .9rem;align-items:start;padding:.72rem 1.15rem;border-bottom:1px solid var(--line);transition:opacity .4s}
+.task:last-child{border-bottom:0}
+.task__k{font:500 .64rem/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);padding-top:.28rem}
+.task__m{min-width:0}
+.task__t{font-weight:600;font-size:.98rem;line-height:1.35}
+.task__rs{position:relative;display:grid}
+.task__rs::before{content:"";position:absolute;left:0;top:.45em;width:58%;height:.55em;border-radius:3px;background:linear-gradient(90deg,var(--line) 0%,var(--line-2) 50%,var(--line) 100%);background-size:200% 100%;opacity:0;transition:opacity .2s}
+.task__r{grid-area:1/1;color:var(--fg-2);font-size:.9rem;line-height:1.45;transition:opacity .35s}
+.task__r--b{opacity:0}
+.task__st{display:flex;justify-content:flex-end;min-width:7.8rem;padding-top:.12rem}
+.task__st b{display:inline-flex;align-items:center;gap:.4rem;padding:.22rem .42rem;border-radius:4px;font:500 .6rem/1.4 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--fg-3);white-space:nowrap;transition:color .3s,background .3s}
+.task__st b::before{content:"";width:.4rem;height:.4rem;border-radius:50%;background:currentColor;flex:none}
+.task__notes{display:grid;margin-top:.45rem;margin-right:-8.6rem}
+.task__note{grid-area:1/1;display:flex;align-items:center;gap:.5rem;font-size:1.25rem;transform:rotate(-1.4deg);transform-origin:left;clip-path:inset(-20% 100% -20% -5%);transition:clip-path .8s var(--ease)}
+.task__note svg{width:1.15rem;height:1.15rem;flex:none;overflow:visible;fill:none;stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.task[data-s="new"]{opacity:.45}
+.task[data-s="new"] .task__r,.task[data-s="work"] .task__r{opacity:0}
+.task[data-s="work"] .task__rs::before{opacity:1;animation:shim 1.1s linear infinite}
+.task[data-s="work"] .task__st b{color:var(--fg)}
+.task[data-s="work"] .task__st b::before{animation:pulse 1s infinite}
+.task[data-s="done"] .task__st b,.task[data-s="ok"] .task__st b{color:var(--ok)}
+.task[data-s="flag"] .task__st b,.task[data-s="wait"] .task__st b{color:var(--fg);background:var(--mark)}
+.task[data-s="ok"] .task__r--a{opacity:0}
+.task[data-s="ok"] .task__r--b{opacity:1}
+.task:not([data-s="flag"]) .hl{background-size:0% 84%}
+.task[data-s="flag"] .task__note--a,.task[data-s="ok"] .task__note--b{clip-path:inset(-20% 0 -20% -5%)}
+.meter{display:flex;gap:4px}
+.meter i{width:1.4rem;height:4px;border-radius:2px;background:var(--line-2);transition:background .4s}
+.meter i[data-s="done"],.meter i[data-s="ok"]{background:var(--ok)}
+.meter i[data-s="flag"],.meter i[data-s="wait"]{background:var(--mark-d)}
+@media (max-width:560px){
+  .task{grid-template-columns:3.9rem minmax(0,1fr)}
+  .task__st{grid-column:2;justify-content:flex-start;min-width:0;padding-top:.2rem}
+  .task__st b{padding-left:0}
+  .task[data-s="flag"] .task__st b,.task[data-s="wait"] .task__st b{padding-left:.42rem}
+  .task__notes{margin-right:0}
+}
 
-  .two-col { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
-  @media (min-width: 800px) { .two-col { grid-template-columns: 1fr 1fr; gap: 4rem; } }
-  .plain-list { margin: 0; padding-left: 1.2rem; }
-  .plain-list li { margin-bottom: 0.75rem; max-width: 34rem; }
+/* Ablaufband im Hero: Eingang, KI, Freigabe, erledigt */
+.flow{--gx:36%;--yx:67%;--cy:58%;--lift:3.1rem;position:relative;height:clamp(210px,20vw,250px);background:var(--bg-2);border-block:1px solid var(--line);overflow:hidden}
+.flow__track{position:absolute;left:var(--gx);right:0;top:var(--cy);height:1px;background:var(--line-2)}
+.flow__items{position:absolute;inset:0;z-index:2;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
+.flow__gate{position:absolute;left:var(--gx);top:var(--cy);width:8.6rem;height:8.8rem;transform:translate(-50%,-50%);z-index:3;display:grid;place-items:center;align-content:center;gap:.35rem;border-radius:20px;background:var(--card);border:1px solid var(--line-2);box-shadow:var(--shadow);overflow:hidden}
+.flow__gate b{font-size:2.3rem;font-weight:800;letter-spacing:-.05em;line-height:1}
+.flow__gate span{font:500 .6rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+.flow__gate::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--petrol),transparent);opacity:0}
+.flow__desk{position:absolute;left:var(--yx);top:calc(var(--cy) - var(--lift));width:9.4rem;height:4.2rem;transform:translate(-50%,-50%);z-index:1;border-radius:16px;border:1.5px dashed var(--line-2);transition:border-color .3s,background .3s}
+.flow__desk.is-on{border-color:var(--pen);background:rgba(180,35,24,.045)}
+.flow__lbl{position:absolute;transform:translateX(-50%);white-space:nowrap;z-index:4}
+.flow__lbl--ki{left:var(--gx);top:calc(var(--cy) - 4.4rem - 1.75rem)}
+.flow__lbl--you{left:var(--yx);top:calc(var(--cy) - var(--lift) - 2.1rem - 1.75rem)}
+.flow__lbl--auto{left:var(--yx);top:calc(var(--cy) + 1.25rem)}
+.flow__cap{position:absolute;bottom:.85rem;z-index:4}
+.flow__cap--in{left:max(20px,4%)}
+.flow__cap--out{right:max(20px,4%)}
+.tok{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:.45rem;padding:.44rem .72rem .44rem .55rem;border-radius:999px;border:1px solid var(--line-2);background:var(--card);box-shadow:0 8px 16px -12px rgba(24,48,47,.45);font:500 .7rem/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);white-space:nowrap;will-change:transform;transition:background .3s,border-color .3s,color .3s}
+.tok b{font-weight:500}
+.tok svg{width:.85rem;height:.85rem;overflow:visible;flex:none}
+.tok .c0{fill:none;stroke:var(--line-2);stroke-width:1.6;transition:opacity .2s}
+.tok .ck{fill:none;stroke:var(--ok);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .2s}
+.tok .hk{fill:none;stroke:var(--pen);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.tok.done,.tok.ok{border-color:rgba(11,122,94,.5);color:var(--fg)}
+.tok.done .c0,.tok.sign .c0,.tok.ok .c0{opacity:0}
+.tok.done .ck{opacity:1}
+.tok.flag,.tok.sign{background:var(--mark);border-color:var(--mark-d);color:var(--fg)}
+.tok.flag .c0{stroke:var(--fg)}
+.tok.sign .hk,.tok.ok .hk{stroke-dashoffset:0;transition:stroke-dashoffset .7s var(--ease)}
+@media (max-width:700px){
+  .flow{--gx:39%;--yx:76%;--lift:2.6rem}
+  .flow__gate{width:6.4rem;height:7.4rem}
+  .flow__gate b{font-size:1.8rem}
+  .flow__desk{width:6.2rem;height:3.4rem}
+  .flow__lbl{font-size:.58rem;letter-spacing:.06em}
+  .flow__lbl--ki{top:calc(var(--cy) - 3.7rem - 1.5rem)}
+  .flow__lbl--you{top:calc(var(--cy) - var(--lift) - 1.7rem - 1.5rem)}
+  .flow__lbl--auto{top:calc(var(--cy) + 1.05rem)}
+  .tok{font-size:.6rem;padding:.4rem .58rem .4rem .45rem;gap:.35rem}
+  .tok svg{width:.75rem;height:.75rem}
+}
 
-  .contact { background: var(--ink); color: var(--sheet); }
-  .contact a { color: var(--sheet); }
-  .contact p { color: #C9D4D2; }
-  .contact .mail { font-size: clamp(1.3rem, 3vw, 1.75rem); font-weight: 500; color: var(--sheet); }
+/* Faktenzeile */
+.facts ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.facts li{padding:1.2rem 1.1rem;border-left:1px solid var(--line);font:400 .72rem/1.55 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);min-width:0}
+.facts li:first-child{border-left:0;padding-left:0}
+.facts b{display:block;color:var(--fg);font-weight:500}
+@media (max-width:760px){
+  .facts ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts li:nth-child(odd){border-left:0;padding-left:0}
+  .facts li:nth-child(n+3){border-top:1px solid var(--line)}
+}
 
-  .site-footer { padding: 2rem 0; font-size: 0.95rem; color: var(--muted); }
-  .site-footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-  .site-footer nav { display: flex; gap: 1.5rem; }
+/* Abschnitte */
+.sec{position:relative;padding-block:clamp(4.5rem,9vw,8rem);border-top:1px solid var(--line)}
+.sec--tint{background:var(--bg-2)}
+.sec__head{display:grid;gap:1.1rem;margin-bottom:clamp(2.2rem,5vw,3.6rem)}
+.after{margin-top:1.6rem;color:var(--fg-2);max-width:42rem}
 
-  /* Zweites Blatt hinter dem Beispiel */
-  .sheet-stack { position: relative; padding: 1rem 0 1rem 1rem; }
-  .sheet-stack::before {
-    content: ""; position: absolute; top: 0; right: 1.5rem; bottom: 2rem; left: 0;
-    background: var(--sheet); border: 1px solid var(--line); border-radius: 4px;
-    transform: rotate(-2.5deg);
-  }
+/* Tagesverlauf */
+.day{border:1px solid var(--line);border-radius:20px;background:var(--card);box-shadow:var(--shadow);padding:clamp(1.1rem,2.6vw,2rem);display:grid;gap:1.5rem}
+.day__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.8rem 1.5rem}
+.seg{display:inline-flex;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--bg-2)}
+.seg__b{border:0;background:transparent;color:var(--fg-2);padding:.5rem 1.2rem;min-height:2.75rem;border-radius:999px;font-weight:600;font-size:.92rem;transition:background .25s,color .25s}
+.seg__b[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.day__chart{display:grid;grid-template-columns:5.6rem minmax(0,1fr);height:12.4rem}
+.day__lanes{display:grid;grid-template-rows:repeat(6,1.3rem);align-content:start;padding-top:2.3rem}
+.day__lanes span{font:500 .62rem/1.3rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.day__plot{position:relative;min-width:0}
+.day__open{position:absolute;left:37.5%;width:37.5%;top:0;bottom:1.9rem;border-inline:1px dashed var(--line-2);background:var(--bg-2)}
+.day__open .lbl{position:absolute;left:.6rem;right:.4rem;top:.55rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.day__grid{position:absolute;left:0;right:0;top:2.3rem;height:7.8rem;background:repeating-linear-gradient(to bottom,transparent 0,transparent calc(1.3rem - 1px),var(--line) calc(1.3rem - 1px),var(--line) 1.3rem)}
+.day__dots{position:absolute;inset:0 0 1.9rem 0}
+.dot{position:absolute;width:.62rem;height:.62rem;margin:-.31rem 0 0 -.31rem;border-radius:50%;border:1.5px solid var(--fg-3);background:var(--card);opacity:0;transform:scale(.3);transition:opacity .35s,transform .45s var(--ease),background .35s,border-color .35s,box-shadow .35s;transition-delay:var(--d,0ms)}
+.dot.on{opacity:1;transform:none}
+.dot.manual{background:var(--fg);border-color:var(--fg)}
+.dot.wait{border-color:var(--fg-3);border-style:dashed}
+.dot.auto{background:var(--ok);border-color:var(--ok);box-shadow:0 0 0 3px rgba(11,122,94,.14)}
+.dot.handoff{background:var(--mark);border-color:var(--mark-d)}
+.day__axis{position:absolute;left:0;right:0;bottom:0;height:1.9rem;border-top:1px solid var(--line-2)}
+.day__axis span{position:absolute;top:.6rem;transform:translateX(-50%);font:500 .68rem/1 var(--f-mono);color:var(--fg-3);font-variant-numeric:tabular-nums}
+.day__axis span::before{content:"";position:absolute;left:50%;top:-.6rem;height:.3rem;width:1px;background:var(--line-2)}
+.day__axis span:first-child{transform:none}
+.day__axis span:first-child::before{left:0}
+.day__axis span:last-child{transform:translateX(-100%)}
+.day__axis span:last-child::before{left:100%}
+.day__legend{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;font-size:.9rem;color:var(--fg-2)}
+.day__legend li{display:flex;align-items:center;gap:.55rem}
+.day__legend .dot{position:static;margin:0;transition:none;flex:none}
+.day[data-mode="ohne"] .lg-mit,.day[data-mode="mit"] .lg-ohne{display:none}
+.day__ctl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem 2.2rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+.fld{display:grid;gap:.5rem;min-width:0}
+.fld__top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:.92rem;color:var(--fg-2)}
+.fld__top output{font:500 .92rem var(--f-mono);color:var(--fg);font-variant-numeric:tabular-nums;white-space:nowrap}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:1.9rem;background:transparent;margin:0;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:linear-gradient(to right,var(--fg) var(--p,50%),var(--line-2) var(--p,50%))}
+input[type=range]::-moz-range-track{height:2px;background:var(--line-2)}
+input[type=range]::-moz-range-progress{height:2px;background:var(--fg)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:1.05rem;height:1.05rem;border-radius:50%;background:var(--fg);border:0;margin-top:calc(-.525rem + 1px);box-shadow:0 0 0 5px rgba(24,48,47,.08);transition:box-shadow .2s}
+input[type=range]::-moz-range-thumb{width:1.05rem;height:1.05rem;border-radius:50%;background:var(--fg);border:0}
+input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 8px rgba(24,48,47,.12)}
+@media (pointer:coarse){input[type=range]{height:2.75rem}}
+.day__out{display:flex;flex-wrap:wrap;align-items:flex-end;gap:.8rem 1.6rem}
+.day__num{font-size:clamp(3.2rem,8vw,5.4rem);font-weight:800;letter-spacing:-.045em;line-height:.86;min-width:2.6em}
+.day__txt{display:grid;gap:.35rem;flex:1 1 18rem;min-width:0}
+.day__unit{font-weight:600;font-size:1.1rem}
+.day__line{color:var(--fg-2);min-height:3.2em}
+.day__fine{font-size:.84rem;color:var(--fg-3)}
+@media (max-width:760px){
+  .day__ctl{grid-template-columns:minmax(0,1fr)}
+  .day__wide{display:none}
+  .day__chart{grid-template-columns:4.7rem minmax(0,1fr)}
+  .day__open .lbl{left:.3rem;right:.15rem;font-size:.58rem;letter-spacing:.03em}
+}
 
-  /* Beispiele */
-  .examples { background: #EAEFED; }
-  .example-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: 1.5rem; align-items: start;
-  }
-  .example {
-    margin: 0; background: var(--sheet); border: 1px solid var(--line); border-radius: 4px;
-    padding: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem;
-  }
-  .tag {
-    align-self: flex-start; font-size: 0.8rem; font-weight: 500;
-    background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 0.1rem 0.65rem;
-  }
-  .example .sheet-meta { margin: 0.35rem 0 0; }
-  .example p { margin: 0; font-size: 1rem; }
-  .example .pen { font-size: 1.2rem; margin: 0.35rem 0 0 0.75rem; }
+/* Einsatzfelder */
+.fields{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr);gap:1.25rem;align-items:start}
+.fields__nav{display:grid;gap:.45rem}
+.fb{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.05rem .8rem;align-items:center;text-align:left;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:.8rem 1rem;min-height:3.7rem;transition:border-color .25s,background .25s,box-shadow .25s}
+.fb__t{font-weight:600;line-height:1.3}
+.fb__s{grid-column:1;font-size:.84rem;color:var(--fg-3);line-height:1.35}
+.fb svg{grid-column:2;grid-row:1 / span 2;width:1rem;height:1rem;opacity:0;transform:translateX(-6px);transition:opacity .25s,transform .25s var(--ease)}
+.fb:hover{border-color:var(--line-2)}
+.fb[aria-selected="true"]{border-color:var(--fg);box-shadow:var(--shadow)}
+.fb[aria-selected="true"] svg{opacity:1;transform:none}
+.stage{border:1px solid var(--line);border-radius:20px;background:var(--card);box-shadow:var(--shadow);overflow:hidden;min-width:0}
+.stage__bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.9rem 1.15rem;border-bottom:1px solid var(--line)}
+.stage__body{display:grid;grid-template-columns:minmax(0,.88fr) 2.4rem minmax(0,1.12fr);padding:1.15rem}
+.io{position:relative;border:1px dashed var(--line-2);border-radius:14px;padding:1rem;display:grid;gap:.65rem;align-content:start;min-height:14.5rem;overflow:hidden;min-width:0;background:var(--bg-2)}
+.io--out{border-style:solid;border-color:var(--line-2);background:var(--card)}
+.io__txt{font-size:1rem;line-height:1.55;display:grid;gap:.5rem}
+.io--in .io__txt{color:var(--fg-2)}
+.io__scan{position:absolute;left:0;right:0;top:0;height:2.6rem;background:linear-gradient(to bottom,transparent,rgba(31,94,88,.08) 70%,rgba(31,94,88,.7) 97%,transparent);opacity:0;pointer-events:none}
+.kv{display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:.8rem;padding-bottom:.45rem;border-bottom:1px solid var(--line);font-size:.96rem}
+.kv:last-child{border-bottom:0;padding-bottom:0}
+.kv b{font:500 .64rem/2.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}
+.stage__link{position:relative;display:grid;place-items:center}
+.stage__link::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line-2)}
+.stage__link i{position:relative;width:.5rem;height:.5rem;border-radius:50%;background:var(--petrol);opacity:0}
+.stage .w{transition:opacity .2s}
+.stage[data-state="work"] .w{opacity:0}
+.stage[data-state="work"] .w.on{opacity:1}
+.stage[data-state="work"] .hl{background-size:0% 84%}
+.stage[data-state="work"] .io__scan{animation:scan .95s linear both}
+.stage[data-state="work"] .stage__link i{animation:hopx .9s linear infinite}
+.stage__you{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem 1.2rem;padding:.9rem 1.15rem;border-top:1px solid var(--line);min-height:4.3rem}
+.stage__you .hand{font-size:1.32rem;transform:rotate(-1.2deg);transform-origin:left;clip-path:inset(-20% 0 -20% -5%);transition:clip-path .8s var(--ease)}
+.stage[data-state="work"] .stage__you .hand,.stage[data-state="done"] .stage__you .hand{clip-path:inset(-20% 100% -20% -5%)}
+.stage__more{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .6rem;padding:.9rem 1.15rem;border-top:1px solid var(--line);min-height:4.1rem}
+.stage__more ul{display:flex;flex-wrap:wrap;gap:.45rem}
+.stage__foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem 1rem;padding:.8rem 1.15rem;border-top:1px solid var(--line);color:var(--fg-3);font-size:.86rem}
+@media (max-width:980px){
+  .fields{grid-template-columns:minmax(0,1fr)}
+  .fields__nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:700px){
+  .stage__body{grid-template-columns:minmax(0,1fr)}
+  .stage__link{height:2.2rem}
+  .stage__link::before{left:50%;right:auto;top:0;bottom:0;width:1px;height:auto}
+  .io{min-height:0}
+  .io--out{min-height:13rem}
+  .fb{min-height:3.1rem;padding:.65rem .8rem}
+  .fb__s,.fb svg{display:none}
+}
 
-  /* Ablauf mit Symbolen */
-  .steps li { border-top: 0; padding-top: 0; }
-  .steps li::before { content: none; }
-  .step-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
-  .step-icon {
-    flex: none; width: 3.5rem; height: 3.5rem; border-radius: 50%;
-    border: 2px solid var(--ink); background: var(--sheet);
-    display: inline-flex; align-items: center; justify-content: center;
-  }
-  .step-icon.active { background: var(--marker); }
-  .step-icon svg { width: 1.6rem; height: 1.6rem; }
-  .step-line { flex: 1; height: 2px; background: var(--line); }
-  .step-no { margin: 0 0 0.3rem; font-size: 0.9rem; font-weight: 700; color: var(--muted); }
+/* Angebot */
+.offers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
+.card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--card);padding:clamp(1.3rem,2.2vw,1.9rem);display:flex;flex-direction:column;gap:1.1rem;transition:border-color .3s,box-shadow .3s;min-width:0}
+.card:hover{border-color:var(--line-2);box-shadow:var(--shadow)}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(245,220,90,.26),transparent 62%);opacity:0;transition:opacity .35s;pointer-events:none}
+.card:hover::before{opacity:1}
+.card > *{position:relative}
+.card__glyph{height:7.2rem;display:flex;align-items:center;border-bottom:1px solid var(--line);padding-bottom:1.2rem}
+.card__tags{display:flex;flex-wrap:wrap;gap:.45rem}
+.card__p{color:var(--fg-2)}
+.card__fine{font-size:.9rem;color:var(--fg-3)}
+.ticks{display:grid;gap:.6rem;font-size:.99rem}
+.ticks li{display:grid;grid-template-columns:1rem minmax(0,1fr);gap:.75rem;align-items:start}
+.ticks li::before{content:"";width:.8rem;height:.45rem;border-left:1.5px solid var(--ok);border-bottom:1.5px solid var(--ok);transform:rotate(-45deg);margin-top:.45rem}
+.card__cta{margin-top:auto;padding-top:.4rem}
+.glyph{width:min(100%,280px);height:auto;overflow:visible}
+.g-grid{fill:var(--line-2)}
+.g-hit{fill:var(--mark);stroke:var(--mark-d);stroke-width:1;transform-box:fill-box;transform-origin:center}
+.g-route{fill:none;stroke:var(--fg);stroke-width:1.5;stroke-dasharray:1;stroke-dashoffset:0}
+.g-lines rect{fill:var(--line-2)}
+.g-mark{fill:var(--mark);transform-box:fill-box;transform-origin:left center}
+.g-check{fill:none;stroke:var(--pen);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
+.g-node{fill:var(--bg-2);stroke:var(--line-2);stroke-width:1.5}
+.g-wire{fill:none;stroke:var(--line-2);stroke-width:1.5}
+.g-in{fill:var(--fg-3)}
+.g-core{fill:none;stroke:var(--fg-2);stroke-width:1.5}
+.g-pulse{fill:var(--petrol);opacity:0}
+.g-ok{fill:none;stroke:var(--ok);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
+@media (max-width:1020px){.offers{grid-template-columns:minmax(0,1fr)}}
 
-  /* Prüffragen */
-  .check-card {
-    background: var(--sheet); border: 1px solid var(--line); border-radius: 4px;
-    padding: 1.75rem 2rem; transform: rotate(1deg);
+/* Uebung aus dem Workshop */
+.uebung{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:1.25rem;align-items:start}
+.panel{border:1px solid var(--line);border-radius:20px;background:var(--card);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.panel__bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.9rem 1.15rem;border-bottom:1px solid var(--line)}
+.panel__foot{padding:.9rem 1.15rem;border-top:1px solid var(--line);color:var(--fg-3);font-size:.86rem}
+.spot{padding:1.15rem;display:grid;gap:1rem}
+.spot__ctx{display:grid;gap:.55rem;padding:.9rem 1rem;border:1px dashed var(--line-2);border-radius:12px;font-size:.94rem;color:var(--fg-2);background:var(--bg-2)}
+.spot__ctx div{display:grid;grid-template-columns:6.4rem minmax(0,1fr);gap:.8rem}
+.spot__ctx dt{font:500 .66rem/2.2 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3)}
+.spot__list{display:grid;gap:.45rem}
+.sent{display:grid;grid-template-columns:.75rem minmax(0,1fr) auto;gap:.8rem;align-items:center;width:100%;text-align:left;border:1px solid var(--line-2);background:var(--card);color:var(--fg);border-radius:12px;padding:.7rem .9rem;min-height:3rem;font-size:1rem;line-height:1.4;transition:border-color .2s,background .3s,color .3s,transform .2s var(--ease)}
+.sent::before{content:"";width:.7rem;height:.7rem;border:1.5px solid var(--fg-3);border-radius:3px;transition:background .3s,border-color .3s}
+.sent:hover:not(:disabled){border-color:var(--fg);transform:translateX(3px)}
+.sent:disabled{cursor:default;color:var(--fg-2)}
+.sent small{font:500 .62rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+.sent.is-ok{border-color:rgba(11,122,94,.45)}
+.sent.is-ok::before{border-color:var(--ok);background:var(--ok)}
+.sent.is-ok small{color:var(--ok)}
+.sent.is-flag,.sent.is-flag:disabled{background:var(--mark);border-color:var(--mark-d);color:var(--fg);font-weight:600}
+.sent.is-flag::before{border-color:var(--fg);background:var(--fg)}
+.spot__after{min-height:8.2rem;display:grid;gap:.7rem;align-content:start;justify-items:start}
+.spot__note{font-size:1.35rem;transform:rotate(-1.5deg);transform-origin:left;border-left:2px solid currentColor;padding-left:.75rem;margin-left:.6rem;animation:write .7s var(--ease) both}
+.spot__hint{color:var(--fg-2);font-size:.96rem}
+.three{border:1px solid var(--line);border-radius:20px;background:var(--card);padding:clamp(1.3rem,2.4vw,1.9rem);display:grid;gap:1.5rem}
+.three__head{display:grid;gap:.5rem}
+.three__head p{color:var(--fg-2);font-size:.96rem}
+.three ul{display:grid;gap:1.25rem}
+.three li{display:flex;gap:.85rem;align-items:flex-start;min-width:0}
+.three strong{display:block;line-height:1.3;margin-bottom:.25rem}
+.three li div span{color:var(--fg-2);font-size:.94rem}
+.box{width:1.55rem;height:1.55rem;border:1.5px solid var(--fg);border-radius:4px;display:grid;place-items:center;flex:none;margin-top:.1rem;background:var(--card)}
+.box svg{width:1.5rem;height:1.5rem;overflow:visible;fill:none;stroke:var(--pen);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:960px){.uebung{grid-template-columns:minmax(0,1fr)}}
+
+/* Ablauf */
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2rem}
+.steps__line{position:absolute;left:0;right:0;top:1.07rem;height:1px;background:var(--line-2)}
+.steps__line i{position:absolute;inset:-.5px 0;background:var(--fg);transform-origin:left center}
+.step{position:relative;display:grid;gap:.7rem;align-content:start;min-width:0}
+.step__n{position:relative;z-index:1;width:2.15rem;height:2.15rem;border-radius:50%;border:1px solid var(--fg);background:var(--card);display:grid;place-items:center;font:500 .78rem var(--f-mono)}
+.step .lbl{margin-top:.7rem}
+.step p:last-child{color:var(--fg-2)}
+@media (max-width:900px){
+  .steps{grid-template-columns:minmax(0,1fr);gap:2.2rem}
+  .steps__line{left:1.07rem;right:auto;top:0;bottom:0;width:1px;height:auto}
+  .steps__line i{inset:0 -.5px;transform-origin:center top}
+  .step{grid-template-columns:2.15rem minmax(0,1fr);column-gap:1.1rem}
+  .step__n{grid-row:1 / span 3}
+  .step .lbl{margin-top:.5rem}
+  .step > :not(.step__n){grid-column:2}
+}
+
+/* Arbeitsweise */
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:.5rem 2rem;padding-block:1.5rem;border-bottom:1px solid var(--line);align-items:baseline;background:linear-gradient(90deg,var(--bg-2),transparent 70%) no-repeat 0 0/0% 100%;transition:background-size .5s var(--ease)}
+.row:hover{background-size:100% 100%}
+.row h3{font-size:clamp(1.25rem,2.2vw,1.6rem);letter-spacing:-.02em;line-height:1.2}
+.row p{color:var(--fg-2)}
+@media (max-width:700px){.row{grid-template-columns:minmax(0,1fr)}}
+
+/* Ueber mich */
+.about{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(2rem,5vw,4.5rem);align-items:start}
+.id{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+.id__face{aspect-ratio:5/3;max-width:100%;display:grid;place-items:center;background:repeating-linear-gradient(to bottom,rgba(24,48,47,.045) 0 1px,transparent 1px 6px),var(--bg-2)}
+.id__mono{font-size:clamp(4rem,10vw,6.2rem);font-weight:800;letter-spacing:-.06em;line-height:1}
+.id dl div{display:grid;grid-template-columns:6.8rem minmax(0,1fr);gap:1rem;padding:.8rem 1.15rem;border-top:1px solid var(--line);font-size:.94rem}
+.id dt{font:500 .66rem/2.3 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3)}
+.about__txt{display:grid;gap:1.2rem}
+.about__txt p{max-width:38rem}
+.about__q{font-size:clamp(1.3rem,2.6vw,1.75rem);line-height:1.28;letter-spacing:-.02em;font-weight:600;max-width:27ch;padding-left:1.1rem;border-left:3px solid var(--mark);margin-top:.6rem}
+@media (max-width:860px){.about{grid-template-columns:minmax(0,1fr)} .about__txt{order:-1}}
+
+/* Fragen */
+.faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:2rem clamp(2rem,5vw,4.5rem);align-items:start}
+.faq .sec__head{margin-bottom:0}
+.qa{border-bottom:1px solid var(--line)}
+.qa:first-child{border-top:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;padding-block:1.25rem;font-weight:600;font-size:1.1rem;line-height:1.35}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"";flex:none;width:.8rem;height:.8rem;background:linear-gradient(var(--fg),var(--fg)) center/100% 1.5px no-repeat,linear-gradient(var(--fg),var(--fg)) center/1.5px 100% no-repeat;transition:transform .3s var(--ease)}
+.qa[open] summary::after{transform:rotate(45deg)}
+.qa p{color:var(--fg-2);padding-bottom:1.4rem;max-width:40rem}
+@media (max-width:860px){.faq{grid-template-columns:minmax(0,1fr)}}
+
+/* Kontakt */
+.cta{overflow:hidden;background:var(--bg-2)}
+.cta__check{position:absolute;right:max(3%,calc(50% - 560px));top:50%;width:min(34vw,400px);transform:translateY(-50%) rotate(-4deg);fill:none;stroke:var(--pen);stroke-width:9;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.cta__in{position:relative;display:grid;gap:1.5rem;justify-items:start}
+.cta .h2{font-size:clamp(2.3rem,6vw,4.5rem);max-width:13ch}
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1rem;padding-top:.5rem}
+.mail__addr{flex:1 1 100%;min-width:0;font-size:clamp(1.3rem,3.6vw,2.2rem);font-weight:600;letter-spacing:-.02em;overflow-wrap:anywhere;-webkit-user-select:all;user-select:all}
+@media (max-width:900px){.cta__check{display:none}}
+
+/* Fuss */
+.foot{border-top:1px solid var(--line);padding-block:1.8rem;color:var(--fg-3);font-size:.9rem}
+.foot__in{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.8rem 2rem}
+.foot nav{display:flex;gap:1.5rem}
+.foot nav a{color:var(--fg-2);text-decoration:none;padding-block:.6rem}
+.foot nav a:hover{color:var(--fg)}
+
+/* Bewegung */
+@keyframes in{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes swipe{from{background-size:0% 86%}to{background-size:100% 86%}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes shim{from{background-position:200% 0}to{background-position:-200% 0}}
+@keyframes scan{0%{opacity:0;transform:translateY(-2.6rem)}12%{opacity:1}88%{opacity:1}100%{opacity:0;transform:translateY(var(--scan-h,12rem))}}
+@keyframes gate{from{transform:translateY(.7rem)}to{transform:translateY(var(--gate-h,8rem))}}
+@keyframes hopx{0%{transform:translateX(-1.1rem);opacity:0}30%,70%{opacity:1}100%{transform:translateX(1.1rem);opacity:0}}
+@keyframes hopy{0%{transform:translateY(-1rem);opacity:0}30%,70%{opacity:1}100%{transform:translateY(1rem);opacity:0}}
+@keyframes write{from{clip-path:inset(-20% 100% -20% -5%)}to{clip-path:inset(-20% -5% -20% -5%)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes fillx{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes filly{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes rv{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes ghit1{0%,8%{transform:scale(0)}15%,92%{transform:scale(1)}100%{transform:scale(0)}}
+@keyframes ghit2{0%,18%{transform:scale(0)}25%,92%{transform:scale(1)}100%{transform:scale(0)}}
+@keyframes ghit3{0%,28%{transform:scale(0)}35%,92%{transform:scale(1)}100%{transform:scale(0)}}
+@keyframes groute{0%,38%{stroke-dashoffset:1}58%,92%{stroke-dashoffset:0}100%{stroke-dashoffset:1}}
+@keyframes gmark{0%,12%{transform:scaleX(0)}26%,92%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+@keyframes gcheck{0%,30%{stroke-dashoffset:1}44%,92%{stroke-dashoffset:0}100%{stroke-dashoffset:1}}
+@keyframes gpulse{0%,8%{opacity:0;transform:translateX(0)}12%{opacity:1}50%{opacity:1;transform:translateX(200px)}55%,100%{opacity:0;transform:translateX(200px)}}
+@keyframes gok{0%,52%{stroke-dashoffset:1}64%,92%{stroke-dashoffset:0}100%{stroke-dashoffset:1}}
+
+@media (prefers-reduced-motion:no-preference){
+  .in{animation:in .75s var(--ease) both;animation-delay:calc(var(--i,0)*70ms + 40ms)}
+  .h1 mark{animation:swipe .65s .6s var(--ease) backwards}
+  .flow__gate{--gate-h:8rem}
+  .flow__gate::after{opacity:1;animation:gate 2.2s ease-in-out infinite alternate}
+  .g-hit--1{animation:ghit1 7s var(--ease) infinite}
+  .g-hit--2{animation:ghit2 7s var(--ease) infinite}
+  .g-hit--3{animation:ghit3 7s var(--ease) infinite}
+  .g-route{animation:groute 7s var(--ease) infinite}
+  .g-mark{animation:gmark 7s var(--ease) infinite}
+  .g-check{animation:gcheck 7s var(--ease) infinite}
+  .g-pulse{animation:gpulse 7s linear infinite}
+  .g-ok{animation:gok 7s var(--ease) infinite}
+}
+@media (prefers-reduced-motion:no-preference) and (max-width:700px){
+  .stage[data-state="work"] .stage__link i{animation-name:hopy}
+  .flow__gate{--gate-h:6.7rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .spot__note,.chip i,.task__st b::before,.task__rs::before{animation:none}
+}
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .nav__bar{animation:grow linear both;animation-timeline:scroll(root)}
+    .rv{animation:rv linear both;animation-timeline:view();animation-range:cover 0% cover 22%}
+    .steps__line i{animation:fillx linear both;animation-timeline:view();animation-range:cover 18% cover 48%}
+    .three li:nth-child(1) .box svg{animation:write linear both;animation-timeline:view();animation-range:cover 14% cover 24%}
+    .three li:nth-child(2) .box svg{animation:write linear both;animation-timeline:view();animation-range:cover 20% cover 30%}
+    .three li:nth-child(3) .box svg{animation:write linear both;animation-timeline:view();animation-range:cover 26% cover 36%}
+    .cta__check{animation:write linear both;animation-timeline:view();animation-range:cover 10% cover 42%}
+    @media (max-width:900px){.steps__line i{animation-name:filly}}
   }
-  .check-card h3 { font-family: var(--hand); font-weight: 400; font-size: 1.5rem; margin: 0 0 1rem; }
-  .check-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.1rem; }
-  .check-list li { display: flex; gap: 0.9rem; align-items: flex-start; }
-  .box {
-    flex: none; width: 1.5rem; height: 1.5rem; margin-top: 0.15rem;
-    border: 2px solid var(--ink); border-radius: 3px; position: relative;
-  }
-  .box svg { position: absolute; left: -1px; top: -6px; width: 1.6rem; height: 1.6rem; overflow: visible; }
-  .check-list strong { display: block; }
-  .check-list span { color: var(--muted); }
-  @media (prefers-reduced-motion: reduce) { .check-card, .sheet-stack::before { transform: none; } }
+}
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="#" aria-label="SimpleWork Startseite"><b>S</b><span class="i">ı<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12 C5 13 7 15.5 9 19.5 C12 11 16 6 22 2" fill="none" stroke="#B42318" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>mple</span><b>W</b><span>ork</span></a>
-    <nav class="site-nav" aria-label="Hauptnavigation">
-      <a href="#beispiele">Beispiele</a>
-      <a href="#workshop">Workshop</a>
+<svg class="sprite" aria-hidden="true">
+  <symbol id="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"></path></symbol>
+  <defs><pattern id="pdots" width="28" height="24" patternUnits="userSpaceOnUse"><circle class="g-grid" cx="4" cy="4" r="2.2"></circle></pattern></defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="#top" aria-label="SimpleWork, zum Seitenanfang"><b>S</b><span class="brand__i">ı<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12 C5 13 7 15.5 9 19.5 C12 11 16 6 22 2"></path></svg></span>mple<b>W</b>ork</a>
+    <nav class="nav__links" aria-label="Hauptnavigation">
+      <a href="#einsatz">Einsatzfelder</a>
+      <a href="#angebot">Angebot</a>
+      <a href="#ablauf">Ablauf</a>
       <a href="#ueber-mich">Über mich</a>
-      <a href="#kontakt">Kontakt</a>
+      <a href="#fragen">Fragen</a>
     </nav>
+    <div class="nav__end">
+      <a class="btn btn--sm" href="#kontakt">Erstgespräch</a>
+      <button type="button" class="nav__menu" id="navMenu" aria-expanded="false" aria-controls="navPanel" aria-label="Menü öffnen"><span></span><span></span></button>
+    </div>
   </div>
+  <nav class="nav__panel" id="navPanel" aria-label="Menü" hidden>
+    <div class="wrap">
+      <a href="#einsatz">Einsatzfelder</a>
+      <a href="#angebot">Angebot</a>
+      <a href="#uebung">Übung aus dem Workshop</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#ueber-mich">Über mich</a>
+      <a href="#fragen">Fragen</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </nav>
+  <span class="nav__bar" aria-hidden="true"></span>
 </header>
 
 <main>
-  <section class="hero">
-    <div class="wrap">
-      <div>
-        <h1>KI-Workshops für kleine Betriebe in Marburg und Umgebung</h1>
-        <p class="lead">Ihre Mitarbeitenden lernen an ihren eigenen Aufgaben, wie sie ChatGPT und ähnliche Werkzeuge einsetzen und wann sie den Ergebnissen nicht trauen sollten.</p>
-        <a class="button" href="#kontakt">Erstgespräch vereinbaren</a>
-        <p class="hero-note">Das Erstgespräch ist kostenlos und unverbindlich.</p>
+  <section class="hero" id="top">
+    <div class="wrap hero__in">
+      <div class="hero__copy">
+        <p class="eyebrow in" style="--i:0">Beratung, Workshops und KI-Agenten für kleine Betriebe</p>
+        <h1 class="h1 in" style="--i:1">KI, die Ihrem Betrieb <mark>Arbeit abnimmt.</mark></h1>
+        <p class="lead in" style="--i:2">Ich zeige Ihnen, welche Aufgaben sich in Ihrem Betrieb mit KI lösen lassen, schule Ihr Team und baue die passenden Agenten und Automatisierungen. Was die KI vorbereitet, bleibt prüfbar. Das letzte Wort haben Sie.</p>
+        <div class="hero__cta in" style="--i:3">
+          <a class="btn" href="#kontakt">Kostenloses Erstgespräch <svg aria-hidden="true"><use href="#arr"></use></svg></a>
+          <a class="btn btn--ghost" href="#einsatz">Einsatzfelder ansehen</a>
+        </div>
+        <p class="hero__note in" style="--i:4">Unverbindlich. Antwort innerhalb von zwei Werktagen.</p>
       </div>
 
-      <div class="sheet-stack">
-      <figure class="sheet" style="margin:0">
-        <p class="sheet-meta">Kundenanfrage per E-Mail</p>
-        <p class="sheet-question">Haben Sie den Kombi aus der Anzeige noch? Und ist der Zahnriemen schon gemacht?</p>
-        <p class="sheet-meta">Antwortentwurf der KI</p>
-        <p class="sheet-answer">Guten Tag, vielen Dank für Ihre Anfrage. Das Fahrzeug ist noch verfügbar. <mark>Der Zahnriemen wurde bei 120.000 km gewechselt.</mark> Gerne vereinbaren wir eine Probefahrt.</p>
-        <p class="pen">Steht nirgends in den Unterlagen. Erst nachsehen.</p>
-        <figcaption class="sheet-caption">Die KI formuliert schnell und klingt sicher, auch dort, wo ihr die Information fehlt. Solche Stellen zu erkennen, ist ein fester Teil jedes Workshops.</figcaption>
+      <figure class="feed in" id="feed" data-run="rest" style="--i:3">
+        <div class="feed__bar">
+          <span class="lbl">Heute im Betrieb</span>
+          <span class="chip" id="feedChip" data-tone="warn"><i></i><span id="feedChipT">2 warten auf Sie</span></span>
+        </div>
+        <ol class="feed__list">
+          <li class="task" data-s="done" data-end="done">
+            <span class="task__k">E-Mail</span>
+            <div class="task__m"><p class="task__t">Anfrage zur Lieferzeit</p><div class="task__rs"><p class="task__r">Standardfrage, sofort beantwortet</p></div></div>
+            <span class="task__st"><b>erledigt</b></span>
+          </li>
+          <li class="task" data-s="done" data-end="done">
+            <span class="task__k">Beleg</span>
+            <div class="task__m"><p class="task__t">Eingangsrechnung, zwei Seiten</p><div class="task__rs"><p class="task__r">Daten ausgelesen, Buchung vorbereitet</p></div></div>
+            <span class="task__st"><b>erledigt</b></span>
+          </li>
+          <li class="task" data-s="done" data-end="done">
+            <span class="task__k">Termin</span>
+            <div class="task__m"><p class="task__t">Rückrufbitte, 19:40 Uhr</p><div class="task__rs"><p class="task__r">Zwei Terminvorschläge verschickt</p></div></div>
+            <span class="task__st"><b>erledigt</b></span>
+          </li>
+          <li class="task" data-s="wait" data-end="wait">
+            <span class="task__k">Beitrag</span>
+            <div class="task__m"><p class="task__t">Stellenanzeige für Social Media</p><div class="task__rs"><p class="task__r task__r--a">Text und Bildvorschlag fertig</p><p class="task__r task__r--b" aria-hidden="true">Freigegeben und eingeplant</p></div></div>
+            <span class="task__st"><b>wartet auf Sie</b></span>
+          </li>
+          <li class="task" data-s="flag" data-end="flag">
+            <span class="task__k">Angebot</span>
+            <div class="task__m">
+              <p class="task__t">Angebot für einen Neukunden</p>
+              <div class="task__rs"><p class="task__r task__r--a">Entwurf fertig, <mark class="hl">1 Stelle ohne Beleg</mark></p><p class="task__r task__r--b" aria-hidden="true">Geprüft, korrigiert und verschickt</p></div>
+              <div class="task__notes">
+                <p class="hand task__note task__note--a">Rabatt steht nirgends. Erst klären.</p>
+                <p class="hand task__note task__note--b" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 13 C6 14 8 16 10 20 C13 12 17 7 22 3"></path></svg>Geklärt. Kann raus.</p>
+              </div>
+            </div>
+            <span class="task__st"><b>prüfen</b></span>
+          </li>
+        </ol>
+        <div class="feed__foot">
+          <span class="lbl" id="feedCount">5 Aufgaben · 3 erledigt · 2 warten auf Sie</span>
+          <span class="meter" id="feedMeter" aria-hidden="true"><i data-s="done"></i><i data-s="done"></i><i data-s="done"></i><i data-s="wait"></i><i data-s="flag"></i></span>
+        </div>
       </figure>
+    </div>
+
+    <div class="flow" id="flow" role="img" aria-label="So läuft eine Aufgabe durch: E-Mails, Anrufe, Belege und Termine kommen ungeordnet an. Die KI bereitet sie vor. Was sie sicher erledigen kann, ist danach erledigt. Markierte Aufgaben geben Sie selbst frei.">
+      <div class="flow__track" aria-hidden="true"></div>
+      <div class="flow__desk" aria-hidden="true"></div>
+      <div class="flow__items" id="flowItems" aria-hidden="true"></div>
+      <div class="flow__gate" aria-hidden="true"><b>KI</b><span>bereitet vor</span></div>
+      <span class="lbl flow__lbl flow__lbl--ki" aria-hidden="true">2 · KI</span>
+      <span class="lbl flow__lbl flow__lbl--you" aria-hidden="true">3 · Sie geben frei</span>
+      <span class="lbl flow__lbl flow__lbl--auto" aria-hidden="true">Routine läuft durch</span>
+      <span class="lbl flow__cap flow__cap--in" aria-hidden="true">1 · Aufgaben kommen rein</span>
+      <span class="lbl flow__cap flow__cap--out" aria-hidden="true">4 · Erledigt</span>
+    </div>
+  </section>
+
+  <div class="facts">
+    <div class="wrap">
+      <ul>
+        <li><b>Für jede Branche</b>Handwerk, Handel, Gastronomie, Büro</li>
+        <li><b>Erstgespräch</b>kostenlos und unverbindlich</li>
+        <li><b>Ein Ansprechpartner</b>von der Beratung bis zum Betrieb</li>
+        <li><b>Vor Ort oder online</b>Marburg und Umgebung</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="sec" id="alltag">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="eyebrow rv">Alltag</p>
+        <h2 class="h2 rv">Wo im Betrieb die Zeit bleibt.</h2>
+        <p class="lead rv">Anfragen beantworten, Angebote schreiben, Termine abstimmen, Belege erfassen: Vieles davon wiederholt sich jeden Tag. Stellen Sie Ihre eigenen Zahlen ein und schalten Sie um.</p>
+      </div>
+
+      <div class="day rv" id="day" data-mode="ohne">
+        <div class="day__head">
+          <div class="seg" role="group" aria-label="Ansicht wählen">
+            <button type="button" class="seg__b" id="dayOhne" data-mode="ohne" aria-pressed="true">Ohne KI</button>
+            <button type="button" class="seg__b" id="dayMit" data-mode="mit" aria-pressed="false">Mit KI</button>
+          </div>
+          <p class="lbl">Beispieltag · Verteilung angenommen</p>
+        </div>
+
+        <div class="day__chart" id="dayChart" role="img" aria-label="Zeitstrahl eines Beispieltags von 0 bis 24 Uhr mit sechs Zeilen: Anfragen, Angebote, Termine, Belege, Beiträge und Rückfragen. Jeder Punkt steht für eine wiederkehrende Aufgabe. Ein Teil davon fällt außerhalb der Arbeitszeit von 9 bis 18 Uhr an.">
+          <div class="day__lanes" aria-hidden="true"><span>Anfragen</span><span>Angebote</span><span>Termine</span><span>Belege</span><span>Beiträge</span><span>Rückfragen</span></div>
+          <div class="day__plot">
+            <div class="day__open"><span class="lbl">Arbeitszeit<span class="day__wide"> 9 bis 18 Uhr</span></span></div>
+            <div class="day__grid" aria-hidden="true"></div>
+            <div class="day__dots" id="dayDots"></div>
+            <div class="day__axis" aria-hidden="true">
+              <span style="left:0%">0</span><span style="left:25%">6</span><span style="left:37.5%">9</span><span style="left:50%">12</span><span style="left:62.5%">15</span><span style="left:75%">18</span><span style="left:87.5%">21</span><span style="left:100%">24</span>
+            </div>
+          </div>
+        </div>
+
+        <ul class="day__legend">
+          <li class="lg-ohne"><i class="dot on manual"></i>von Hand erledigt</li>
+          <li class="lg-ohne"><i class="dot on wait"></i>bleibt bis zum nächsten Tag liegen</li>
+          <li class="lg-mit"><i class="dot on auto"></i>von der KI erledigt oder vorbereitet</li>
+          <li class="lg-mit"><i class="dot on handoff"></i>bleibt bei Ihrem Team</li>
+        </ul>
+
+        <div class="day__ctl">
+          <div class="fld">
+            <div class="fld__top"><label for="dayN">Routineaufgaben pro Tag</label><output id="dayNO" for="dayN">24</output></div>
+            <input type="range" id="dayN" min="5" max="60" step="1" value="24">
+          </div>
+          <div class="fld">
+            <div class="fld__top"><label for="dayMin">Minuten pro Aufgabe</label><output id="dayMinO" for="dayMin">6 min</output></div>
+            <input type="range" id="dayMin" min="2" max="20" step="1" value="6">
+          </div>
+          <div class="fld">
+            <div class="fld__top"><label for="dayShare">Anteil, den KI übernehmen kann</label><output id="dayShareO" for="dayShare">50 %</output></div>
+            <input type="range" id="dayShare" min="20" max="80" step="5" value="50">
+          </div>
+        </div>
+
+        <div class="day__out">
+          <p class="day__num"><output id="dayHours" for="dayN dayMin dayShare">26,4</output></p>
+          <div class="day__txt">
+            <p class="day__unit">Stunden im Monat, die KI Ihrem Team abnehmen kann</p>
+            <p class="day__line" id="dayLine" aria-live="polite">In diesem Beispiel fallen 24 Routineaufgaben am Tag an. Ein Teil davon kommt außerhalb der Arbeitszeit und bleibt bis zum nächsten Tag liegen.</p>
+          </div>
+        </div>
+        <p class="day__fine">Gerechnet mit 22 Arbeitstagen im Monat. Ihre Eingaben bleiben im Browser.</p>
       </div>
     </div>
   </section>
 
-  <section class="block examples" id="beispiele">
+  <section class="sec sec--tint" id="einsatz">
     <div class="wrap">
-      <h2>Drei Stellen, an denen es im Alltag hakt</h2>
-      <p class="intro">Die Beispiele zeigen, welche Art von Fehlern im Workshop geübt wird. Im Workshop selbst arbeiten wir mit Texten aus Ihrem Betrieb.</p>
-      <div class="example-grid">
-        <figure class="example">
-          <span class="tag">Erfundene Leistung</span>
-          <p class="sheet-meta">Angebotstext, Badsanierung</p>
-          <p>Das Angebot umfasst Demontage, Fliesenarbeiten und die Montage der Sanitärobjekte, <mark>inklusive Entsorgung des Altmaterials.</mark></p>
-          <p class="pen">Nicht kalkuliert. Streichen oder Preis anpassen.</p>
-        </figure>
-        <figure class="example">
-          <span class="tag">Anweisung missverstanden</span>
-          <p class="sheet-meta">Instagram-Beitrag, Café. Auftrag: längere Öffnungszeit am Donnerstag ankündigen</p>
-          <p>Gute Nachrichten für alle Nachteulen: <mark>Ab sofort sind wir täglich bis 20 Uhr für euch da.</mark></p>
-          <p class="pen">Nur donnerstags. So nicht posten.</p>
-        </figure>
-        <figure class="example">
-          <span class="tag">Daten im Prompt</span>
-          <p class="sheet-meta">Eingabe in ein KI-Werkzeug</p>
-          <p>Fasse diese Reklamation kurz zusammen: <mark>Herr Thomas Weber, Kundennummer 40213,</mark> beschwert sich über die verspätete Lieferung …</p>
-          <p class="pen">Name und Nummer vorher raus.</p>
-        </figure>
+      <div class="sec__head">
+        <p class="eyebrow rv">Einsatzfelder</p>
+        <h2 class="h2 rv">Was sich mit KI lösen lässt.</h2>
+        <p class="lead rv">Sechs Bereiche, in denen sich in kleinen Betrieben viel wiederholt. Wählen Sie einen aus und sehen Sie, was die KI daraus macht und was bei Ihnen bleibt.</p>
+      </div>
+
+      <div class="fields rv" id="fields">
+        <div class="fields__nav" role="tablist" aria-label="Einsatzfelder">
+          <button type="button" class="fb" role="tab" id="fbAnfragen" aria-controls="stage" aria-selected="true" data-k="anfragen"><span class="fb__t">Kundenanfragen</span><span class="fb__s">Chat, E-Mail, Telefon</span><svg aria-hidden="true"><use href="#arr"></use></svg></button>
+          <button type="button" class="fb" role="tab" id="fbSchreiben" aria-controls="stage" aria-selected="false" data-k="schreiben"><span class="fb__t">Angebote und Schriftverkehr</span><span class="fb__s">Angebote, E-Mails, Briefe</span><svg aria-hidden="true"><use href="#arr"></use></svg></button>
+          <button type="button" class="fb" role="tab" id="fbBelege" aria-controls="stage" aria-selected="false" data-k="belege"><span class="fb__t">Belege und Ablage</span><span class="fb__s">Rechnungen, Formulare, Dokumente</span><svg aria-hidden="true"><use href="#arr"></use></svg></button>
+          <button type="button" class="fb" role="tab" id="fbOrga" aria-controls="stage" aria-selected="false" data-k="orga"><span class="fb__t">Termine und Organisation</span><span class="fb__s">Termine, Protokolle, Aufgaben</span><svg aria-hidden="true"><use href="#arr"></use></svg></button>
+          <button type="button" class="fb" role="tab" id="fbInhalte" aria-controls="stage" aria-selected="false" data-k="inhalte"><span class="fb__t">Marketing und Inhalte</span><span class="fb__s">Beiträge, Bilder, Videos</span><svg aria-hidden="true"><use href="#arr"></use></svg></button>
+          <button type="button" class="fb" role="tab" id="fbWissen" aria-controls="stage" aria-selected="false" data-k="wissen"><span class="fb__t">Wissen im Betrieb</span><span class="fb__s">Handbücher, Preislisten, Einarbeitung</span><svg aria-hidden="true"><use href="#arr"></use></svg></button>
+        </div>
+
+        <div class="stage" id="stage" role="tabpanel" data-state="you">
+          <div class="stage__bar">
+            <span class="lbl" id="stTitle">Kundenanfragen</span>
+            <span class="chip" id="stChip" data-tone="ok"><i></i><span id="stChipT">Sofort beantwortet</span></span>
+          </div>
+          <div class="stage__body">
+            <div class="io io--in">
+              <p class="lbl" id="stInL">Nachricht einer Kundin · 22:14 Uhr</p>
+              <div class="io__txt" id="stIn"><p>„Haben Sie am Samstag geöffnet? Und kann ich gleich einen Termin bekommen?“</p></div>
+              <span class="io__scan" aria-hidden="true"></span>
+            </div>
+            <div class="stage__link" aria-hidden="true"><i></i></div>
+            <div class="io io--out">
+              <p class="lbl" id="stOutL">Antwort des Assistenten · 22:14 Uhr</p>
+              <div class="io__txt" id="stOut" aria-live="polite"><p>Ja, samstags sind wir von 9 bis 14 Uhr für Sie da.</p><p>Für einen Termin kann ich Ihnen Samstag um 10 Uhr oder um 12:30 Uhr anbieten. Welcher passt Ihnen besser?</p></div>
+            </div>
+          </div>
+          <div class="stage__you">
+            <span class="lbl">Ihr Anteil</span>
+            <p class="hand" id="stHand">Nur noch den Termin bestätigen.</p>
+          </div>
+          <div class="stage__more">
+            <span class="lbl">Auch möglich</span>
+            <ul id="stMore"><li class="tag">Chat auf der Website</li><li class="tag">WhatsApp</li><li class="tag">Telefonassistent</li><li class="tag">E-Mail-Postfach mit Antwortentwürfen</li></ul>
+          </div>
+          <div class="stage__foot">
+            <span>Beispiel mit festen Texten.</span>
+            <button type="button" class="btn btn--ghost btn--sm" id="stPlay">Noch einmal abspielen</button>
+          </div>
+        </div>
+      </div>
+      <p class="after rv">Ihre Aufgabe ist nicht dabei? Was sich wiederholt und mit Text, Sprache, Bildern oder Zahlen zu tun hat, lässt sich meist ganz oder teilweise mit KI lösen. Fragen Sie nach.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="angebot">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="eyebrow rv">Angebot</p>
+        <h2 class="h2 rv">Beratung, Workshop, Umsetzung.</h2>
+        <p class="lead rv">Drei Bausteine. Sie können sie einzeln buchen oder nacheinander aufbauen.</p>
+      </div>
+
+      <div class="offers">
+        <article class="card rv">
+          <div class="card__glyph">
+            <svg class="glyph" viewBox="0 0 280 96" aria-hidden="true">
+              <rect width="280" height="96" fill="url(#pdots)"></rect>
+              <path class="g-route" pathLength="1" d="M60 76 L144 28 L228 52"></path>
+              <circle class="g-hit g-hit--1" cx="60" cy="76" r="5.5"></circle>
+              <circle class="g-hit g-hit--2" cx="144" cy="28" r="5.5"></circle>
+              <circle class="g-hit g-hit--3" cx="228" cy="52" r="5.5"></circle>
+            </svg>
+          </div>
+          <div class="card__tags"><span class="tag">Der Einstieg</span></div>
+          <h3 class="h3">Beratung</h3>
+          <p class="card__p">Wir gehen Ihre Abläufe durch und halten fest, wo KI bei Ihnen Zeit spart, was sich nicht lohnt und womit Sie anfangen sollten.</p>
+          <ul class="ticks">
+            <li>Abläufe und Zeitfresser aufnehmen</li>
+            <li>Einschätzung, was sich lohnt und was nicht</li>
+            <li>Kurze schriftliche Empfehlung mit Reihenfolge</li>
+          </ul>
+          <p class="card__fine">Vor Ort oder online.</p>
+          <p class="card__cta"><a class="link" href="#kontakt">Beratung anfragen <svg aria-hidden="true"><use href="#arr"></use></svg></a></p>
+        </article>
+
+        <article class="card rv">
+          <div class="card__glyph">
+            <svg class="glyph" viewBox="0 0 280 96" aria-hidden="true">
+              <rect class="g-mark" x="88" y="27" width="124" height="19" rx="3"></rect>
+              <g class="g-lines">
+                <rect x="0" y="12" width="150" height="5" rx="2.5"></rect><rect x="160" y="12" width="64" height="5" rx="2.5"></rect>
+                <rect x="0" y="34" width="80" height="5" rx="2.5"></rect><rect x="94" y="34" width="112" height="5" rx="2.5"></rect>
+                <rect x="0" y="56" width="196" height="5" rx="2.5"></rect>
+                <rect x="0" y="78" width="120" height="5" rx="2.5"></rect>
+              </g>
+              <path class="g-check" pathLength="1" d="M228 38 c5 2 9 7 12 14 c5 -16 14 -29 28 -38"></path>
+            </svg>
+          </div>
+          <div class="card__tags"><span class="tag">Für Ihr Team</span></div>
+          <h3 class="h3">Workshop</h3>
+          <p class="card__p">Ein halber Tag bei Ihnen vor Ort. Ihr Team arbeitet selbst am Rechner, mit den E-Mails, Angeboten und Unterlagen aus dem eigenen Alltag.</p>
+          <ul class="ticks">
+            <li>Texte und Antworten mit KI vorbereiten und selbst überarbeiten</li>
+            <li>Erfundene Angaben erkennen, bevor sie beim Kunden landen</li>
+            <li>Einschätzen, welche Daten nicht in ein KI-Werkzeug gehören</li>
+          </ul>
+          <p class="card__fine">Im Anschluss erhalten Sie eine schriftliche Zusammenfassung mit den Beispielen aus dem Workshop.</p>
+          <p class="card__cta"><a class="link" href="#kontakt">Workshop anfragen <svg aria-hidden="true"><use href="#arr"></use></svg></a></p>
+        </article>
+
+        <article class="card rv">
+          <div class="card__glyph">
+            <svg class="glyph" viewBox="0 0 280 96" aria-hidden="true">
+              <path class="g-wire" d="M40 48 H120 M160 48 H240"></path>
+              <rect class="g-node" x="1" y="28" width="40" height="40" rx="10"></rect>
+              <rect class="g-in" x="11" y="41" width="20" height="3" rx="1.5"></rect><rect class="g-in" x="11" y="48" width="14" height="3" rx="1.5"></rect><rect class="g-in" x="11" y="55" width="17" height="3" rx="1.5"></rect>
+              <rect class="g-node" x="120" y="28" width="40" height="40" rx="10"></rect>
+              <circle class="g-core" cx="140" cy="48" r="8"></circle><circle class="g-in" cx="140" cy="48" r="2.5"></circle>
+              <rect class="g-node" x="239" y="28" width="40" height="40" rx="10"></rect>
+              <path class="g-ok" pathLength="1" d="M250 49 l7 7 l12 -15"></path>
+              <circle class="g-pulse" cx="40" cy="48" r="4"></circle>
+            </svg>
+          </div>
+          <div class="card__tags"><span class="tag">Die Umsetzung</span></div>
+          <h3 class="h3">KI-Agenten und Automatisierung</h3>
+          <p class="card__p">Ich baue Assistenten und Abläufe, die wiederkehrende Aufgaben selbst erledigen oder für Ihr Team vorbereiten, abgestimmt auf die Programme, mit denen Sie arbeiten.</p>
+          <ul class="ticks">
+            <li>Assistenten für Chat, E-Mail und Telefon</li>
+            <li>Abläufe für Angebote, Belege, Termine und Inhalte</li>
+            <li>Gemeinsamer Test, bevor etwas startet</li>
+          </ul>
+          <p class="card__fine">Einmalige Einrichtung, danach monatliche Betreuung.</p>
+          <p class="card__cta"><a class="link" href="#kontakt">Umsetzung anfragen <svg aria-hidden="true"><use href="#arr"></use></svg></a></p>
+        </article>
+      </div>
+      <p class="after rv">Was zuerst sinnvoll ist, klären wir im Erstgespräch. Wenn sich für Ihren Betrieb nichts davon lohnt, sage ich Ihnen das.</p>
+    </div>
+  </section>
+
+  <section class="sec sec--tint" id="uebung">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="eyebrow rv">Aus dem Workshop</p>
+        <h2 class="h2 rv">Eine Übung zum Ausprobieren.</h2>
+        <p class="lead rv">KI klingt sicher, auch wenn ihr die Information fehlt. Im Workshop lernt Ihr Team, solche Stellen zu finden. Versuchen Sie es selbst.</p>
+      </div>
+
+      <div class="uebung">
+        <div class="panel rv">
+          <div class="panel__bar"><span class="lbl">Eine Aussage ist erfunden</span><span class="chip"><i></i><span id="spotStep">Fall 1 von 3</span></span></div>
+          <div class="spot" id="spot">
+            <div>
+              <h3 class="h3">Welchem Satz trauen Sie nicht?</h3>
+              <p class="lbl" id="spotKind" style="margin-top:.5rem">Büro · Antwort auf eine Kundenanfrage</p>
+            </div>
+            <dl class="spot__ctx" id="spotCtx"></dl>
+            <div class="spot__list" id="spotList"></div>
+            <div class="spot__after">
+              <p class="spot__hint" id="spotHint" aria-live="polite">Tippen Sie auf den Satz, der nicht belegt ist.</p>
+              <p class="hand spot__note" id="spotNote" hidden></p>
+              <button type="button" class="btn btn--ghost btn--sm" id="spotNext" hidden>Nächster Fall</button>
+            </div>
+          </div>
+          <p class="panel__foot">Im Workshop üben wir das an Texten aus Ihrem Betrieb.</p>
+        </div>
+
+        <div class="three rv">
+          <div class="three__head">
+            <h3 class="h3">Drei Fragen vor dem Absenden</h3>
+            <p>Sie ziehen sich durch alle Übungen. Technikwissen braucht dafür niemand.</p>
+          </div>
+          <ul>
+            <li><span class="box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13 C6 14 8 16 10 19 C13 12 17 7 22 3"></path></svg></span><div><strong>Steht das in unseren Unterlagen?</strong><span>Jede Zahl, jedes Datum, jede Zusage.</span></div></li>
+            <li><span class="box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13 C6 14 8 16 10 19 C13 12 17 7 22 3"></path></svg></span><div><strong>Macht der Text, was ich wollte?</strong><span>Auftrag und Ergebnis nebeneinanderlegen.</span></div></li>
+            <li><span class="box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13 C6 14 8 16 10 19 C13 12 17 7 22 3"></path></svg></span><div><strong>Gehört das überhaupt ins Tool?</strong><span>Kundendaten und interne Zahlen bleiben draußen.</span></div></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="block" id="workshop">
+  <section class="sec" id="ablauf">
     <div class="wrap">
-      <h2>So läuft der Workshop ab</h2>
-      <p class="intro">Keine Folienschlacht und keine Vorführung von zwanzig Tools. Geübt wird mit den Texten, Anfragen und Abläufen, die in Ihrem Betrieb jede Woche anfallen.</p>
+      <div class="sec__head">
+        <p class="eyebrow rv">Ablauf</p>
+        <h2 class="h2 rv">So läuft die Zusammenarbeit.</h2>
+      </div>
       <ol class="steps">
-        <li>
-          <div class="step-head"><span class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="step-line"></span></div>
-          <p class="step-no">Schritt 1</p>
-          <h3>Vorgespräch</h3>
-          <p>Wir klären, welche Aufgaben bei Ihnen regelmäßig Zeit kosten und wer am Workshop teilnimmt. Daraus entstehen die Übungen.</p>
+        <li class="steps__line" aria-hidden="true"><i></i></li>
+        <li class="step rv">
+          <span class="step__n">1</span>
+          <p class="lbl">Kostenlos · unverbindlich</p>
+          <h3 class="h3">Erstgespräch</h3>
+          <p>Sie erzählen, was bei Ihnen regelmäßig Zeit kostet. Ich sage Ihnen, wo KI hilft und wo nicht.</p>
         </li>
-        <li>
-          <div class="step-head"><span class="step-icon active"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/><path d="M7 9l2.5 2.5L7 14M12 13h4"/></svg></span><span class="step-line"></span></div>
-          <p class="step-no">Schritt 2</p>
-          <h3>Workshop vor Ort</h3>
-          <p>Ein halber Tag in Ihrem Betrieb. Die Teilnehmenden arbeiten selbst am Rechner, mit Beispielen aus ihrem Alltag.</p>
+        <li class="step rv">
+          <span class="step__n">2</span>
+          <p class="lbl">Abläufe · Empfehlung</p>
+          <h3 class="h3">Beratung</h3>
+          <p>Wir gehen Ihre Abläufe durch und legen fest, womit sich der Anfang lohnt.</p>
         </li>
-        <li>
-          <div class="step-head"><span class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h5"/></svg></span></div>
-          <p class="step-no">Schritt 3</p>
-          <h3>Nachbereitung</h3>
-          <p>Sie erhalten eine kurze schriftliche Zusammenfassung mit den Beispielen aus dem Workshop zum Nachschlagen.</p>
+        <li class="step rv">
+          <span class="step__n">3</span>
+          <p class="lbl">Team · Agenten</p>
+          <h3 class="h3">Workshop und Umsetzung</h3>
+          <p>Ihr Team lernt den sicheren Umgang mit KI. Ich baue die Lösungen, die wir festgelegt haben, und teste sie mit Ihnen, bevor sie starten.</p>
+        </li>
+        <li class="step rv">
+          <span class="step__n">4</span>
+          <p class="lbl">Laufend</p>
+          <h3 class="h3">Betreuung</h3>
+          <p>Ich bleibe Ihr Ansprechpartner und passe an, wenn sich bei Ihnen etwas ändert oder neue Aufgaben dazukommen.</p>
         </li>
       </ol>
     </div>
   </section>
 
-  <section class="block">
-    <div class="wrap two-col" style="align-items:center">
-      <div>
-        <h2>Drei Fragen vor dem Absenden</h2>
-        <p>Wer mit KI arbeitet, muss nicht jede Technik verstehen. Es reicht, vor jedem Absenden kurz zu prüfen. Diese drei Fragen ziehen sich durch alle Übungen im Workshop.</p>
-      </div>
-      <div class="check-card">
-        <h3>Vor dem Absenden</h3>
-        <ul class="check-list">
-          <li><span class="box"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 13 C6 14 8 16 10 19 C13 12 17 7 22 3" fill="none" stroke="#B42318" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p style="margin:0"><strong>Steht das in unseren Unterlagen?</strong><span>Jede Zahl, jedes Datum, jede Zusage.</span></p></li>
-          <li><span class="box"></span><p style="margin:0"><strong>Macht der Text, was ich wollte?</strong><span>Auftrag und Ergebnis nebeneinanderlegen.</span></p></li>
-          <li><span class="box"></span><p style="margin:0"><strong>Gehört das überhaupt ins Tool?</strong><span>Kundendaten und interne Zahlen bleiben draußen.</span></p></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="block">
-    <div class="wrap two-col">
-      <div>
-        <h2>Was Ihre Mitarbeitenden danach können</h2>
-        <ul class="plain-list">
-          <li>E-Mails, Antworten auf Kundenanfragen und kurze Texte mit KI vorbereiten und anschließend selbst überarbeiten.</li>
-          <li>Erfundene oder falsche Angaben in KI-Ergebnissen erkennen, bevor sie beim Kunden landen.</li>
-          <li>Einschätzen, welche Daten nicht in ein KI-Werkzeug gehören, etwa Kundendaten oder interne Zahlen.</li>
-        </ul>
-      </div>
-      <div>
-        <h2>Und danach</h2>
-        <p>Oft zeigt sich im Workshop, dass bestimmte Anfragen immer gleich ablaufen. Solche Fälle lassen sich automatisieren, zum Beispiel mit einem WhatsApp-Assistenten, der Standardfragen wie Öffnungszeiten beantwortet und alles andere an Sie weiterleitet.</p>
-        <p>Das ist ein eigenes Angebot und keine Voraussetzung für den Workshop.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="ueber-mich">
+  <section class="sec" id="arbeitsweise">
     <div class="wrap">
-      <h2>Über mich</h2>
-      <p>Bevor ich studiert habe, war ich Automobilkaufmann. Wie Anfragen, Angebote und Absprachen in einem Betrieb laufen, kenne ich also aus eigener Arbeit. Danach habe ich Medienwissenschaften studiert und meine Abschlussarbeit über Vertrauen in KI geschrieben. Derzeit studiere ich im Master Medien und kulturelle Praxis an der Philipps-Universität Marburg.</p>
-      <p>Mich interessiert weniger, was KI alles kann, sondern wann man sich auf sie verlassen kann und wann nicht. Genau darum geht es im Workshop.</p>
+      <div class="sec__head">
+        <p class="eyebrow rv">Arbeitsweise</p>
+        <h2 class="h2 rv">Worauf Sie sich verlassen können.</h2>
+      </div>
+      <div class="rows">
+        <div class="row rv"><h3>Ein Ansprechpartner</h3><p>Wer Sie berät, schult auch Ihr Team und baut Ihre Lösung. Es gibt keine Übergaben und keine Warteschleife.</p></div>
+        <div class="row rv"><h3>Der Mensch entscheidet</h3><p>Die KI bereitet vor, Ihr Team prüft und gibt frei. Die Verantwortung bleibt dort, wo sie hingehört.</p></div>
+        <div class="row rv"><h3>Klein anfangen</h3><p>Wir beginnen mit einer Aufgabe, die sich schnell lohnt. Erst wenn sie läuft, kommt die nächste.</p></div>
+        <div class="row rv"><h3>Daten mit Bedacht</h3><p>Kundendaten und interne Zahlen gehören nicht in jedes Werkzeug. Was wohin darf, klären wir, bevor etwas eingerichtet wird.</p></div>
+        <div class="row rv"><h3>Klare Sprache</h3><p>Keine Folienschlacht und keine Vorführung von zwanzig Tools. Es geht um die Aufgaben, die bei Ihnen jede Woche anfallen.</p></div>
+        <div class="row rv"><h3>Angebot vor dem Start</h3><p>Sie wissen, was es kostet, bevor etwas beginnt.</p></div>
+      </div>
     </div>
   </section>
 
-  <section class="block contact" id="kontakt">
-    <div class="wrap">
-      <h2>Kontakt</h2>
-      <p>Schreiben Sie mir kurz, um welchen Betrieb es geht und wie viele Personen teilnehmen würden. Ich melde mich innerhalb von zwei Werktagen.</p>
-        <a class="mail" href="mailto:julian.petri9@gmail.com?subject=Anfrage%20KI-Workshop">julian.petri9@gmail.com</a>
+  <section class="sec" id="ueber-mich">
+    <div class="wrap about">
+      <div class="id rv">
+        <div class="id__face"><span class="id__mono" aria-hidden="true">JP</span></div>
+        <dl>
+          <div><dt>Name</dt><dd>Julian Petri</dd></div>
+          <div><dt>Ausbildung</dt><dd>Automobilkaufmann</dd></div>
+          <div><dt>Bachelor</dt><dd>Medienwissenschaften, Abschlussarbeit über Vertrauen in KI</dd></div>
+          <div><dt>Master</dt><dd>Medien und kulturelle Praxis, Philipps-Universität Marburg</dd></div>
+          <div><dt>Schwerpunkte</dt><dd>KI-Agenten, Automatisierung, Texte und Videos mit KI</dd></div>
+          <div><dt>Standort</dt><dd>Marburg</dd></div>
+        </dl>
+      </div>
+      <div class="about__txt">
+        <p class="eyebrow rv">Über mich</p>
+        <h2 class="h2 rv">Erst Kaufmann, dann KI.</h2>
+        <p class="rv">Ich bin Julian Petri. Vor dem Studium war ich Automobilkaufmann. Wie Anfragen, Angebote und Absprachen in einem Betrieb laufen, kenne ich aus eigener Arbeit.</p>
+        <p class="rv">Danach habe ich Medienwissenschaften studiert und meine Abschlussarbeit über Vertrauen in KI geschrieben. Heute studiere ich im Master an der Philipps-Universität Marburg.</p>
+        <p class="rv">Mit KI arbeite ich jeden Tag. Ich baue Agenten und Automatisierungen, schreibe und recherchiere mit KI und produziere eigene Videoreihen, die vom Skript bis zum fertigen Clip mit KI entstehen.</p>
+        <blockquote class="about__q rv">Mich interessiert weniger, was KI alles kann, als die Frage, wann man sich auf sie verlassen kann.</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="fragen">
+    <div class="wrap faq">
+      <div class="sec__head">
+        <p class="eyebrow rv">Fragen</p>
+        <h2 class="h2 rv">Häufige Fragen</h2>
+      </div>
+      <div class="rv">
+        <details class="qa" name="faq" open>
+          <summary>Welche Aufgaben lassen sich mit KI lösen?</summary>
+          <p>Vor allem solche, die sich wiederholen und mit Text, Sprache, Bildern oder Dokumenten zu tun haben: Anfragen beantworten, Angebote und E-Mails vorbereiten, Belege erfassen, Termine abstimmen, Beiträge schreiben, Wissen auffindbar machen. Ob Ihre Aufgabe dazugehört, klären wir im Erstgespräch.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>Brauchen wir Vorkenntnisse oder neue Programme?</summary>
+          <p>Vorkenntnisse braucht niemand. Bei den Programmen baue ich auf dem auf, was Sie schon nutzen. Wenn ein zusätzliches Werkzeug nötig ist, erfahren Sie das vorher, samt Kosten.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>Was kostet das?</summary>
+          <p>Das hängt vom Umfang ab. Nach dem kostenlosen Erstgespräch erhalten Sie ein festes Angebot. Bei Agenten und Automatisierungen besteht es aus einer einmaligen Einrichtung und einer monatlichen Betreuung.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>Was passiert mit unseren Daten?</summary>
+          <p>Vor jeder Einrichtung legen wir gemeinsam fest, auf welche Informationen die KI zugreifen darf und welche draußen bleiben. Im Workshop lernt Ihr Team, welche Angaben nicht in ein KI-Werkzeug gehören.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>Was ist, wenn die KI etwas Falsches sagt?</summary>
+          <p>Das kommt vor, und darauf ist alles ausgelegt. Im Workshop üben wir, solche Stellen zu erkennen. Agenten richte ich so ein, dass sie bei Unsicherheit an Ihr Team übergeben und nicht raten. Wichtige Ergebnisse gehen erst nach Ihrer Freigabe raus.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>Ersetzt KI meine Mitarbeitenden?</summary>
+          <p>Darum geht es nicht. Die KI übernimmt Aufgaben, die sich jeden Tag wiederholen. Beratung, Verhandlungen und alles, was Fingerspitzengefühl braucht, bleiben bei Ihrem Team.</p>
+        </details>
+        <details class="qa" name="faq">
+          <summary>Für welche Betriebe eignet sich das?</summary>
+          <p>Für kleine Betriebe jeder Branche, in denen sich Aufgaben wiederholen: Handwerk, Handel, Gastronomie, Praxen, Büros, Dienstleister. Workshops finden vor Ort in Marburg und Umgebung statt, Beratung und Umsetzung gehen auch online.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec cta" id="kontakt">
+    <svg class="cta__check" viewBox="0 0 240 200" aria-hidden="true"><path d="M14 112 C44 122 66 148 86 188 C116 106 160 50 226 12"></path></svg>
+    <div class="wrap cta__in">
+      <p class="eyebrow rv">Kontakt</p>
+      <h2 class="h2 rv">Erzählen Sie mir von Ihrem Betrieb.</h2>
+      <p class="lead rv">Schreiben Sie kurz, um welchen Betrieb es geht und welche Aufgabe Sie am meisten Zeit kostet. Ich melde mich innerhalb von zwei Werktagen. Das Erstgespräch ist kostenlos und unverbindlich.</p>
+      <div class="mail rv">
+        <span class="mail__addr" id="mailAddr">julian.petri9@gmail.com</span>
+        <button type="button" class="btn" id="mailCopy"><span>Adresse kopieren</span></button>
+        <a class="btn btn--ghost" href="mailto:julian.petri9@gmail.com?subject=Anfrage%20SimpleWork">E-Mail schreiben</a>
+      </div>
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <span>SimpleWork, Julian Petri, Marburg</span>
+<footer class="foot">
+  <div class="wrap foot__in">
+    <span>SimpleWork · Julian Petri · Marburg</span>
+    <span>Mit KI gebaut, von Hand geprüft.</span>
     <nav aria-label="Rechtliches">
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
@@ -361,5 +1024,470 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  'use strict';
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var wait = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
+  var nf1 = new Intl.NumberFormat('de-DE', {minimumFractionDigits: 1, maximumFractionDigits: 1});
+  var hasIO = 'IntersectionObserver' in window;
+  function h(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  /* Sprungmarken */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    var t = document.getElementById(a.getAttribute('href').slice(1));
+    if (!t) return;
+    e.preventDefault();
+    t.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+  });
+
+  /* Menue auf kleinen Bildschirmen */
+  function initNav(){
+    var btn = $('#navMenu'), panel = $('#navPanel');
+    if (!btn || !panel) return;
+    function set(open){
+      panel.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    }
+    btn.addEventListener('click', function(){ set(panel.hidden); });
+    panel.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hidden){ set(false); btn.focus(); } });
+  }
+
+  /* Ablaufband: Aufgaben kommen ungeordnet rein, laufen durch die KI und kommen erledigt heraus, markierte gibt der Mensch frei */
+  function initFlow(){
+    var root = $('#flow'), box = $('#flowItems');
+    if (!root || !box) return;
+    var gate = $('.flow__gate', root), desk = $('.flow__desk', root);
+    var LABELS = ['E-Mail', 'Anruf', 'Beleg', 'Termin', 'Angebot', 'Beitrag', 'Rückfrage', 'Rechnung', 'Bewertung'];
+    var ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><circle class="c0" cx="8" cy="8" r="5"></circle><path class="ck" d="M3 8.6l3.2 3.2L13 4.6"></path><path class="hk" pathLength="1" d="M2 9 C4 9.6 5.4 11.2 6.6 13.6 C8.6 8.4 11.2 5 15 2.4"></path></svg>';
+    var W = 0, cy = 0, gx = 0, yx = 0, dw = 0, lift = 0, r0 = 0, rl = 60, f0 = 0, gap = 156, speed = 42, amp = 52, N = 0, L = 0;
+    var toks = [], off = 0, last = 0, raf = 0, run = false, inView = true, deskOn = false;
+    function rnd(n){ var x = Math.sin(n * 91.7) * 43758.5453; return x - Math.floor(x); }
+    function smooth(v){ v = Math.max(0, Math.min(1, v)); return v * v * (3 - 2 * v); }
+
+    function frame(dt){
+      off += dt * speed;
+      var active = false;
+      for (var i = 0; i < N; i++){
+        var p = i * gap + off, g = Math.floor(p / L), x = p - g * L - 130, n = i + g * N, tk = toks[i];
+        if (tk.n !== n){
+          tk.n = n;
+          tk.el.lastChild.textContent = LABELS[((n % LABELS.length) + LABELS.length) % LABELS.length];
+          tk.flag = ((n % 3) + 3) % 3 === 1;
+          tk.oy = (rnd(n + .3) - .5) * 2 * amp;
+          tk.rot = (rnd(n + 7.1) - .5) * 16;
+        }
+        var c = x >= gx ? 0 : 1 - smooth((x - (gx - 270)) / 215);
+        var cls;
+        if (x < gx) cls = 'tok';
+        else if (!tk.flag) cls = 'tok done';
+        else if (x < yx - dw * .36) cls = 'tok flag';
+        else if (x < yx + dw * .3){ cls = 'tok sign'; active = true; }
+        else cls = 'tok ok';
+        if (cls !== tk.cls){ tk.cls = cls; tk.el.className = cls; }
+        var yy = cy + tk.oy * c;
+        if (tk.flag && x > r0) yy -= lift * smooth((x - r0) / rl) * (1 - smooth((x - f0) / 80));
+        tk.el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + yy.toFixed(1) + 'px) translate(-50%,-50%) rotate(' + (tk.rot * c).toFixed(2) + 'deg)';
+      }
+      if (active !== deskOn){ deskOn = active; desk.classList.toggle('is-on', active); }
+    }
+    function build(){
+      W = root.clientWidth;
+      if (!W) return;
+      var small = W < 700;
+      gap = small ? 104 : 156; speed = small ? 28 : 42;
+      amp = Math.min(small ? 38 : 54, root.clientHeight * .23);
+      gx = gate.offsetLeft; yx = desk.offsetLeft; dw = desk.offsetWidth; cy = gate.offsetTop;
+      lift = cy - desk.offsetTop;
+      r0 = gx + gate.offsetWidth / 2 + 8;
+      rl = Math.max(20, Math.min(80, yx - dw / 2 - r0 - 4));
+      f0 = yx + dw / 2 + 6;
+      var n = Math.ceil((W + 260) / gap);
+      if (n !== N){
+        N = n; box.textContent = ''; toks = [];
+        for (var i = 0; i < N; i++){
+          var el = document.createElement('span');
+          el.className = 'tok';
+          el.innerHTML = ICON + '<b></b>';
+          box.appendChild(el);
+          toks.push({el: el, n: null, cls: 'tok', flag: false, oy: 0, rot: 0});
+        }
+      }
+      L = N * gap;
+      frame(0);
+    }
+    function loop(now){
+      if (!run) return;
+      frame(Math.min(.05, (now - last) / 1000));
+      last = now;
+      raf = requestAnimationFrame(loop);
+    }
+    function start(){ if (run || reduce) return; run = true; last = performance.now(); raf = requestAnimationFrame(loop); }
+    function stop(){ run = false; cancelAnimationFrame(raf); }
+
+    build();
+    if ('ResizeObserver' in window) new ResizeObserver(build).observe(root); else window.addEventListener('resize', build);
+    if (hasIO){
+      new IntersectionObserver(function(es){ inView = es[0].isIntersecting; if (inView && !document.hidden) start(); else stop(); }).observe(root);
+    } else start();
+    document.addEventListener('visibilitychange', function(){ if (document.hidden) stop(); else if (inView) start(); });
+  }
+
+  /* Aufgabenliste im Kopfbereich: eingegangen, KI arbeitet, erledigt oder zur Freigabe */
+  function initFeed(){
+    var el = $('#feed');
+    if (!el) return;
+    var rows = $$('.task', el), segs = $$('#feedMeter i'), chip = $('#feedChip'), chipT = $('#feedChipT'), cnt = $('#feedCount');
+    var LABEL = {'new': 'eingegangen', work: 'KI arbeitet', done: 'erledigt', flag: 'prüfen', wait: 'wartet auf Sie', ok: 'freigegeben'};
+    function st(i, s){
+      rows[i].dataset.s = s;
+      $('.task__st b', rows[i]).textContent = LABEL[s];
+      if (segs[i]) segs[i].dataset.s = s;
+    }
+    function tally(){
+      var d = 0, w = 0;
+      rows.forEach(function(r){ var s = r.dataset.s; if (s === 'done' || s === 'ok') d++; else if (s === 'flag' || s === 'wait') w++; });
+      cnt.textContent = rows.length + ' Aufgaben · ' + d + ' erledigt' + (w ? ' · ' + w + (w === 1 ? ' wartet' : ' warten') + ' auf Sie' : '');
+      return w;
+    }
+    function status(txt, tone){ chipT.textContent = txt; chip.dataset.tone = tone; }
+    function waiting(w){ status(w + (w === 1 ? ' wartet' : ' warten') + ' auf Sie', 'warn'); }
+    if (reduce || !hasIO) return;
+
+    var token = 0, playing = false;
+    function rest(){
+      token++; playing = false;
+      rows.forEach(function(r, i){ st(i, r.dataset.end); });
+      el.dataset.run = 'rest';
+      waiting(tally());
+    }
+    async function play(){
+      var my = ++token, i;
+      playing = true;
+      function ok(){ return my === token; }
+      while (ok()){
+        el.dataset.run = 'play';
+        for (i = 0; i < rows.length; i++) st(i, 'new');
+        tally(); status('KI arbeitet', 'busy');
+        await wait(750); if (!ok()) return;
+        for (i = 0; i < rows.length; i++){
+          st(i, 'work');
+          await wait(800); if (!ok()) return;
+          st(i, rows[i].dataset.end); tally();
+          await wait(rows[i].dataset.end === 'flag' ? 1200 : 480); if (!ok()) return;
+        }
+        waiting(tally());
+        await wait(3400); if (!ok()) return;
+        for (i = 0; i < rows.length; i++){
+          var e = rows[i].dataset.end;
+          if (e !== 'wait' && e !== 'flag') continue;
+          st(i, 'ok');
+          var w = tally();
+          if (w) waiting(w); else status('alles erledigt', 'ok');
+          await wait(1300); if (!ok()) return;
+        }
+        await wait(4200); if (!ok()) return;
+        el.dataset.run = 'out';
+        await wait(480);
+      }
+    }
+    new IntersectionObserver(function(es){
+      if (es[0].isIntersecting){ if (!playing) play(); } else if (playing) rest();
+    }, {threshold: .2}).observe(el);
+  }
+
+  /* Tagesverlauf mit eigenen Zahlen */
+  function initDay(){
+    var root = $('#day');
+    if (!root) return;
+    var dotsEl = $('#dayDots'), nI = $('#dayN'), mI = $('#dayMin'), sI = $('#dayShare');
+    var hoursO = $('#dayHours'), line = $('#dayLine'), segs = $$('.seg__b', root);
+    var seed = 20261113;
+    function r(){ seed = (seed + 0x6D2B79F5) | 0; var t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }
+    function bell(m, s){ return m + (r() + r() + r() + r() - 2) * s * 1.73; }
+    var LANES = [
+      {w: .26, f: function(){ return r() < .58 ? bell(20.2, 1.3) : 8 + r() * 10; }},
+      {w: .15, f: function(){ return bell(11, 1.5); }},
+      {w: .15, f: function(){ return r() < .4 ? bell(19.4, .9) : bell(13, 2.2); }},
+      {w: .14, f: function(){ return bell(10.3, 1.2); }},
+      {w: .12, f: function(){ return bell(15, 1.5); }},
+      {w: .18, f: function(){ return bell(13.5, 2.4); }}
+    ];
+    var dots = [];
+    for (var i = 0; i < 60; i++){
+      var p = r(), lane = 0, acc = 0;
+      for (var k = 0; k < LANES.length; k++){ acc += LANES[k].w; lane = k; if (p < acc) break; }
+      var hr = Math.max(.4, Math.min(23.6, LANES[lane].f()));
+      var el = document.createElement('i');
+      el.className = 'dot';
+      el.style.left = (hr / 24 * 100).toFixed(2) + '%';
+      el.style.top = (2.3 + lane * 1.3 + .65 + (r() - .5) * .3).toFixed(2) + 'rem';
+      el.style.setProperty('--d', Math.round(hr / 24 * 380) + 'ms');
+      dotsEl.appendChild(el);
+      dots.push({el: el, h: hr, s: r(), open: hr >= 9 && hr < 18});
+    }
+    var mode = 'ohne', touched = false, twId = 0;
+    function tween(to){
+      var from = parseFloat(hoursO.dataset.v || to);
+      hoursO.dataset.v = to;
+      if (reduce || from === to){ hoursO.textContent = nf1.format(to); return; }
+      var my = ++twId, t0 = performance.now();
+      (function f(now){
+        if (my !== twId) return;
+        var q = Math.min(1, (now - t0) / 350), e = 1 - Math.pow(1 - q, 3);
+        hoursO.textContent = nf1.format(from + (to - from) * e);
+        if (q < 1) requestAnimationFrame(f);
+      })(t0);
+    }
+    function update(){
+      var N = +nI.value, min = +mI.value, share = +sI.value / 100;
+      $('#dayNO').textContent = N;
+      $('#dayMinO').textContent = min + ' min';
+      $('#dayShareO').textContent = sI.value + ' %';
+      [nI, mI, sI].forEach(function(inp){ inp.style.setProperty('--p', ((inp.value - inp.min) / (inp.max - inp.min) * 100) + '%'); });
+      var stdN = Math.round(N * share);
+      var std = dots.slice(0, N).sort(function(a, b){ return a.s - b.s; }).slice(0, stdN);
+      var out = 0;
+      dots.forEach(function(d, ix){
+        var c = 'dot';
+        if (ix < N){
+          c += ' on';
+          if (!d.open) out++;
+          if (mode === 'ohne') c += d.open ? ' manual' : ' wait';
+          else c += std.indexOf(d) > -1 ? ' auto' : ' handoff';
+        }
+        d.el.className = c;
+      });
+      tween(N * share * min * 22 / 60);
+      var rest = N - stdN;
+      if (mode === 'ohne'){
+        line.textContent = 'In diesem Beispiel fallen ' + N + ' Routineaufgaben am Tag an. ' + (out === 0
+          ? 'Alle kommen während der Arbeitszeit.'
+          : (out === 1 ? '1 davon kommt außerhalb der Arbeitszeit und bleibt' : out + ' davon kommen außerhalb der Arbeitszeit und bleiben') + ' bis zum nächsten Tag liegen.');
+      } else {
+        line.textContent = 'Die KI erledigt ' + stdN + ' von ' + N + ' Aufgaben oder bereitet sie vor, auch nach Feierabend. ' + rest + (rest === 1 ? ' bleibt' : ' bleiben') + ' bei Ihrem Team.';
+      }
+      root.dataset.mode = mode;
+    }
+    function setMode(m){
+      mode = m;
+      segs.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.mode === m)); });
+      update();
+    }
+    segs.forEach(function(b){ b.addEventListener('click', function(){ touched = true; setMode(b.dataset.mode); }); });
+    [nI, mI, sI].forEach(function(inp){ inp.addEventListener('input', function(){ touched = true; update(); }); });
+    update();
+    if (!reduce && hasIO){
+      var io = new IntersectionObserver(function(es){
+        if (!es[0].isIntersecting) return;
+        io.disconnect();
+        setTimeout(function(){ if (!touched) setMode('mit'); }, 1900);
+      }, {threshold: .8});
+      io.observe($('#dayChart'));
+    }
+  }
+
+  /* Einsatzfelder: Eingang, KI arbeitet, Ergebnis, Ihr Anteil */
+  function initFields(){
+    var root = $('#fields'), stage = $('#stage');
+    if (!root || !stage) return;
+    var D = {
+      anfragen: {title: 'Kundenanfragen',
+        inL: 'Nachricht einer Kundin · 22:14 Uhr', inp: ['„Haben Sie am Samstag geöffnet? Und kann ich gleich einen Termin bekommen?“'],
+        outL: 'Antwort des Assistenten · 22:14 Uhr', out: ['Ja, samstags sind wir von 9 bis 14 Uhr für Sie da.', 'Für einen Termin kann ich Ihnen Samstag um 10 Uhr oder um 12:30 Uhr anbieten. Welcher passt Ihnen besser?'],
+        tag: 'Sofort beantwortet', tone: 'ok', hand: 'Nur noch den Termin bestätigen.',
+        more: ['Chat auf der Website', 'WhatsApp', 'Telefonassistent', 'E-Mail-Postfach mit Antwortentwürfen']},
+      schreiben: {title: 'Angebote und Schriftverkehr',
+        inL: 'Ihre Stichpunkte', inp: ['Angebot Herr Müller', 'Büro streichen, drei Räume, rund 85 qm', 'Material inklusive, Start ab KW 12'],
+        outL: 'Angebotsentwurf', out: ['Sehr geehrter Herr Müller,', 'gern bieten wir Ihnen die Malerarbeiten in Ihrem Büro an: drei Räume mit rund 85 Quadratmetern, Material inklusive. Wir können ab Kalenderwoche 12 beginnen. {Auf den Gesamtpreis erhalten Sie 5 Prozent Rabatt.}'],
+        tag: '1 Stelle ohne Beleg', tone: 'warn', hand: 'Rabatt stand nicht in den Notizen. Raus damit.',
+        more: ['Antworten auf Standard-E-Mails', 'Zahlungserinnerungen', 'Übersetzungen', 'Texte in einfacher Sprache']},
+      belege: {title: 'Belege und Ablage',
+        inL: 'Eingangsrechnung · PDF, zwei Seiten', inp: ['Bürobedarf Nord GmbH', 'Rechnung 2026-1184 vom 14.11.2026', '14 Positionen, zahlbar innerhalb von 14 Tagen'],
+        outL: 'Ausgelesene Daten', out: ['Lieferant|Bürobedarf Nord GmbH', 'Nummer|2026-1184', 'Betrag|482,60 Euro brutto', 'Fällig am|28.11.2026', 'Konto|Büromaterial (Vorschlag)'],
+        tag: 'Erfasst und vorbereitet', tone: 'ok', hand: 'Konto kurz prüfen, dann buchen.',
+        more: ['Belege für die Steuerberatung sortieren', 'Formulare ausfüllen', 'Verträge nach Fristen durchsuchen', 'Dateien benennen und ablegen']},
+      orga: {title: 'Termine und Organisation',
+        inL: 'Mitschrift einer Besprechung · 40 Minuten', inp: ['„… Lisa klärt bis Freitag die Lieferzeit. Das Angebot für Weber muss nächste Woche raus. Tom ruft den Vermieter an …“'],
+        outL: 'Aufgabenliste', out: ['Lisa|Lieferzeit klären, bis Freitag', 'Tom|Vermieter anrufen', 'Offen|{Angebot Weber, niemand zugeteilt}'],
+        tag: '3 Aufgaben · 1 ohne Zuständigen', tone: 'warn', hand: 'Angebot Weber mache ich selbst.',
+        more: ['Termine mit Kunden abstimmen', 'Erinnerungen verschicken', 'Protokolle schreiben', 'Dienstpläne vorbereiten']},
+      inhalte: {title: 'Marketing und Inhalte',
+        inL: 'Ihr Auftrag', inp: ['Beitrag für Facebook und Instagram: Wir suchen eine Aushilfe für samstags.'],
+        outL: 'Textvorschlag', out: ['Wir suchen Verstärkung: Für samstags brauchen wir eine Aushilfe, die gern mit Menschen arbeitet. Meldet euch direkt bei uns im Laden oder per Nachricht.', 'Dazu ein Bildvorschlag im Stil Ihrer bisherigen Beiträge.'],
+        tag: 'Wartet auf Ihre Freigabe', tone: 'warn', hand: 'Passt. Heute Abend posten.',
+        more: ['Produkttexte', 'Kurzvideos', 'Newsletter', 'Antworten auf Bewertungen']},
+      wissen: {title: 'Wissen im Betrieb',
+        inL: 'Frage einer neuen Kollegin', inp: ['„Wie lege ich eine Reklamation an?“'],
+        outL: 'Antwort aus Ihren Unterlagen', out: ['Öffnen Sie den Kundenvorgang und wählen Sie „Neue Reklamation“. Pflichtfelder sind Kaufdatum und Fehlerbeschreibung.', 'Quelle: Handbuch Kundenservice, Abschnitt 4.2'],
+        tag: 'Beantwortet mit Quelle', tone: 'ok', hand: 'Stimmt so. Abschnitt 4.2 ist aktuell.',
+        more: ['Preislisten durchsuchen', 'Neue Mitarbeitende einarbeiten', 'Vorlagen finden', 'Wissen aus alten E-Mails sichern']}
+    };
+    var tabs = $$('.fb', root);
+    var title = $('#stTitle'), chip = $('#stChip'), chipT = $('#stChipT'), inL = $('#stInL'), inp = $('#stIn'), outL = $('#stOutL'), out = $('#stOut'), hand = $('#stHand'), more = $('#stMore'), again = $('#stPlay');
+    var scanBox = $('.io--in', stage);
+    var cur = 'anfragen', token = 0, words = [], touched = false;
+
+    function fill(k){
+      var d = D[k];
+      cur = k; words = [];
+      title.textContent = d.title; inL.textContent = d.inL; outL.textContent = d.outL;
+      inp.textContent = '';
+      d.inp.forEach(function(t){ inp.appendChild(h('p', '', t)); });
+      out.textContent = '';
+      d.out.forEach(function(lineTxt){
+        var row, target, txt = lineTxt, cut = lineTxt.indexOf('|');
+        if (cut > -1){
+          row = h('div', 'kv'); row.appendChild(h('b', '', lineTxt.slice(0, cut)));
+          target = h('span'); row.appendChild(target); txt = lineTxt.slice(cut + 1);
+        } else { row = h('p'); target = row; }
+        txt.split(/(\{[^}]*\})/).forEach(function(part){
+          if (!part) return;
+          var host = target;
+          if (part.charAt(0) === '{'){ host = h('mark', 'hl'); target.appendChild(host); part = part.slice(1, -1); }
+          part.split(/(\s+)/).forEach(function(tk){
+            if (!tk) return;
+            if (/^\s+$/.test(tk)){ host.appendChild(document.createTextNode(tk)); return; }
+            var s = h('span', 'w on', tk); host.appendChild(s); words.push(s);
+          });
+        });
+        out.appendChild(row);
+      });
+      hand.textContent = d.hand;
+      more.textContent = '';
+      d.more.forEach(function(t){ more.appendChild(h('li', 'tag', t)); });
+      tabs.forEach(function(b){ b.setAttribute('aria-selected', String(b.dataset.k === k)); });
+    }
+    function settle(){
+      var d = D[cur];
+      token++;
+      words.forEach(function(w){ w.classList.add('on'); });
+      stage.dataset.state = 'you';
+      chipT.textContent = d.tag; chip.dataset.tone = d.tone;
+    }
+    async function run(){
+      if (reduce){ settle(); return; }
+      var my = ++token, d = D[cur];
+      words.forEach(function(w){ w.classList.remove('on'); });
+      stage.style.setProperty('--scan-h', scanBox.offsetHeight + 'px');
+      stage.dataset.state = 'work';
+      chipT.textContent = 'KI arbeitet'; chip.dataset.tone = 'busy';
+      await wait(1000); if (my !== token) return;
+      var step = Math.max(14, Math.min(40, 1500 / words.length));
+      for (var i = 0; i < words.length; i++){ words[i].classList.add('on'); await wait(step); if (my !== token) return; }
+      await wait(250); if (my !== token) return;
+      stage.dataset.state = 'done';
+      chipT.textContent = d.tag; chip.dataset.tone = d.tone;
+      await wait(d.tone === 'warn' ? 900 : 450); if (my !== token) return;
+      stage.dataset.state = 'you';
+    }
+    tabs.forEach(function(b){ b.addEventListener('click', function(){ touched = true; fill(b.dataset.k); run(); }); });
+    again.addEventListener('click', function(){ touched = true; run(); });
+    fill(cur); settle();
+    if (!reduce && hasIO){
+      var io = new IntersectionObserver(function(es){
+        if (!es[0].isIntersecting) return;
+        io.disconnect();
+        if (!touched) run();
+      }, {threshold: .45});
+      io.observe(stage);
+    }
+  }
+
+  /* Uebung: die erfundene Aussage finden */
+  function initSpot(){
+    var root = $('#spot');
+    if (!root) return;
+    var CASES = [
+      {kind: 'Büro · Antwort auf eine Kundenanfrage',
+       ctx: [['Anfrage', 'Wann kommt meine Bestellung?'], ['Unterlagen', 'Bestellung eingegangen. Der Liefertermin ist noch offen.']],
+       s: ['Vielen Dank für Ihre Nachricht.', 'Ihre Bestellung ist bei uns eingegangen.', 'Die Lieferung erfolgt am kommenden Dienstag.', 'Bei Fragen melden Sie sich gern.'], x: 2,
+       note: 'Liefertermin ist offen. Nichts zusagen.',
+       why: 'Richtig. Die KI klingt sicher, auch wenn ihr die Information fehlt.'},
+      {kind: 'Handwerk · Angebotstext für eine Badsanierung',
+       ctx: [['Auftrag', 'Angebotstext für eine Badsanierung schreiben.'], ['Kalkuliert', 'Demontage, Fliesenarbeiten, Montage der Sanitärobjekte.']],
+       s: ['Das Angebot umfasst die Demontage der alten Einrichtung.', 'Enthalten sind alle Fliesenarbeiten und die Montage der Sanitärobjekte.', 'Die Entsorgung des Altmaterials ist im Preis inbegriffen.', 'Bei Rückfragen sind wir gern für Sie da.'], x: 2,
+       note: 'Nicht kalkuliert. Streichen oder Preis anpassen.',
+       why: 'Richtig. Eine erfundene Leistung im Angebot zahlen am Ende Sie.'},
+      {kind: 'Gastronomie · Beitrag für Instagram',
+       ctx: [['Auftrag', 'Die längere Öffnungszeit am Donnerstag ankündigen.']],
+       s: ['Gute Nachrichten für alle Nachteulen.', 'Ab sofort sind wir täglich bis 20 Uhr für euch da.', 'Kommt vorbei und bringt Hunger mit.'], x: 1,
+       note: 'Nur donnerstags. So nicht posten.',
+       why: 'Richtig. Der Text liest sich gut und sagt trotzdem etwas anderes als beauftragt.'}
+    ];
+    var step = $('#spotStep'), kind = $('#spotKind'), ctx = $('#spotCtx'), list = $('#spotList'), note = $('#spotNote'), hint = $('#spotHint'), next = $('#spotNext');
+    var cur = 0;
+    function render(){
+      var c = CASES[cur];
+      step.textContent = 'Fall ' + (cur + 1) + ' von ' + CASES.length;
+      kind.textContent = c.kind;
+      ctx.textContent = '';
+      c.ctx.forEach(function(row){ var d = h('div'); d.appendChild(h('dt', '', row[0])); d.appendChild(h('dd', '', row[1])); ctx.appendChild(d); });
+      list.textContent = '';
+      c.s.forEach(function(txt, j){
+        var b = h('button', 'sent'); b.type = 'button';
+        b.appendChild(h('span', '', txt));
+        var tag = h('small', ''); b.appendChild(tag);
+        b.addEventListener('click', function(){ pick(b, j, tag); });
+        list.appendChild(b);
+      });
+      note.hidden = true; next.hidden = true;
+      hint.textContent = 'Tippen Sie auf den Satz, der nicht belegt ist.';
+    }
+    function pick(b, j, tag){
+      var c = CASES[cur];
+      if (j === c.x){
+        b.classList.add('is-flag'); tag.textContent = 'erfunden';
+        $$('.sent', list).forEach(function(x){ x.disabled = true; });
+        note.textContent = c.note; note.hidden = false;
+        hint.textContent = c.why;
+        next.textContent = cur < CASES.length - 1 ? 'Nächster Fall' : 'Noch einmal von vorn';
+        next.hidden = false;
+      } else {
+        b.classList.add('is-ok'); b.disabled = true; tag.textContent = 'in Ordnung';
+        hint.textContent = 'Dieser Satz ist in Ordnung. Die erfundene Stelle steht woanders.';
+      }
+    }
+    next.addEventListener('click', function(){ cur = (cur + 1) % CASES.length; render(); });
+    render();
+  }
+
+  /* Lichtpunkt auf den Angebotskarten, Adresse kopieren */
+  function initMisc(){
+    $$('.card').forEach(function(c){
+      c.addEventListener('pointermove', function(e){
+        var r = c.getBoundingClientRect();
+        c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+    var cp = $('#mailCopy'), addr = $('#mailAddr');
+    if (!cp || !addr) return;
+    var lab = $('span', cp), timer = 0;
+    cp.addEventListener('click', function(){
+      var txt = addr.textContent.trim();
+      function done(msg){ lab.textContent = msg; clearTimeout(timer); timer = setTimeout(function(){ lab.textContent = 'Adresse kopieren'; }, 2400); }
+      function select(){
+        var rg = document.createRange(); rg.selectNodeContents(addr);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rg);
+        done('Adresse ist markiert');
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){ done('Kopiert'); }, select);
+      } else select();
+    });
+  }
+
+  [initNav, initFlow, initFeed, initDay, initFields, initSpot, initMisc].forEach(function(fn){
+    try { fn(); } catch (err) { if (window.console) console.error(err); }
+  });
+})();
+</script>
 </body>
 </html>
