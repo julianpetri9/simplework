@@ -2,7 +2,7 @@
 
 ## 1. Verantwortlicher
 
-Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website ist:
+Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website und bei der Ansprache von Betrieben per Brief ist:
 
 Julian Petri
 KI abgehakt
@@ -36,11 +36,21 @@ Für E-Mails nutze ich den Dienst mailbox.org der Heinlein Hosting GmbH, Schwedt
 
 Ich lösche Ihre Daten, sobald sie für die Bearbeitung Ihrer Anfrage nicht mehr erforderlich sind. Gesetzliche Aufbewahrungspflichten, insbesondere nach Handels- und Steuerrecht, bleiben davon unberührt.
 
-## 5. Ihre Rechte
+## 5. Ansprache von Betrieben per Brief
+
+Ich stelle mein Angebot kleinen Betrieben auch per Brief vor. Dafür verarbeite ich den Namen des Betriebs, die Namen der Inhaber oder Geschäftsführer und die Geschäftsanschrift. Diese Angaben stammen aus öffentlich zugänglichen Quellen, in der Regel aus dem Impressum oder der Website des Betriebs. Dazu notiere ich, was der Betrieb öffentlich über seine Leistungen oder offene Stellen angibt, damit der Brief zu seinen Aufgaben passt.
+
+Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes Interesse liegt darin, Betrieben mein Angebot vorzustellen (Direktwerbung, Erwägungsgrund 47 DSGVO). Ich gebe die Daten nicht an Dritte weiter.
+
+Ich speichere die Angaben, solange ein Gespräch läuft oder in Aussicht steht, höchstens aber zwölf Monate nach dem letzten Kontakt. Entsteht daraus ein Auftrag, gelten die gesetzlichen Aufbewahrungsfristen.
+
+Sie können dieser Nutzung jederzeit ohne Angabe von Gründen widersprechen (Art. 21 Abs. 2 DSGVO). Eine kurze Nachricht an die oben genannte E-Mail-Adresse genügt. Danach nutze ich Ihre Daten nicht mehr für Werbung und vermerke nur, dass Sie keine Post von mir wünschen, damit Sie auch künftig keine erhalten.
+
+## 6. Ihre Rechte
 
 Sie haben das Recht auf Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO), auf Berichtigung (Art. 16 DSGVO), auf Löschung (Art. 17 DSGVO), auf Einschränkung der Verarbeitung (Art. 18 DSGVO) und auf Datenübertragbarkeit (Art. 20 DSGVO).
 
-Soweit eine Verarbeitung auf Art. 6 Abs. 1 lit. f DSGVO beruht, können Sie ihr aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit widersprechen (Art. 21 DSGVO).
+Soweit eine Verarbeitung auf Art. 6 Abs. 1 lit. f DSGVO beruht, können Sie ihr aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit widersprechen (Art. 21 DSGVO). Einer Nutzung für Werbung können Sie jederzeit ohne Angabe von Gründen widersprechen (Art. 21 Abs. 2 DSGVO).
 
 Für alle Anliegen genügt eine E-Mail an die oben genannte Adresse.
 
@@ -50,6 +60,6 @@ Der Hessische Beauftragte für Datenschutz und Informationsfreiheit
 Gustav-Stresemann-Ring 1
 65189 Wiesbaden
 
-## 6. Stand
+## 7. Stand
 
 Diese Datenschutzerklärung hat den Stand November 2026. Ich passe sie an, wenn sich die Website oder die rechtlichen Vorgaben ändern.
